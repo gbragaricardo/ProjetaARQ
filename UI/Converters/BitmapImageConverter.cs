@@ -1,8 +1,7 @@
+using ProjetaARQ.Services;
 using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.Windows.Data;
-using ProjetaARQ.Core.Services;
 
 namespace ProjetaARQ.UI.Core.Converters
 {

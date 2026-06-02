@@ -3,8 +3,8 @@ using System.Collections.ObjectModel;
 using GongSolutions.Wpf.DragDrop;
 using System.Windows;
 using ProjetaARQ.Commands.WordExport.MVVM.ViewModels;
-using ProjetaARQ.UI.Core;
 using ProjetaARQ.Commands.WordExport.Services.UndoableCommands;
+using ProjetaARQ.UI;
 
 namespace ProjetaARQ.Commands.WordExport.Services.GongHandlers
 {

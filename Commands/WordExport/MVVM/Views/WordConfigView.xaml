@@ -43,7 +43,8 @@
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/ProjetaARQ;component/Features/WordExport/MVVM/Resources/DataTemplates.xaml"/>
+                <ResourceDictionary Source="/ProjetaARQ;component/Commands/WordExport/MVVM/Resources/DataTemplates.xaml"/>
+                <ResourceDictionary Source="/ProjetaARQ;component/Commands/WordExport/Styles/AnimatedOverlayMenuStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
             <converters:BitmapImageConverter x:Key="BitmapImageConverter"/>

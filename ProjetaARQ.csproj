@@ -177,11 +177,11 @@
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="RevitAPI">
-      <HintPath>D:\Program Files\Autodesk\Revit 2024\RevitAPI.dll</HintPath>
+      <HintPath>..\..\Program Files\Autodesk\Revit 2024\RevitAPI.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="RevitAPIUI">
-      <HintPath>D:\Program Files\Autodesk\Revit 2024\RevitAPIUI.dll</HintPath>
+      <HintPath>..\..\Program Files\Autodesk\Revit 2024\RevitAPIUI.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
@@ -238,8 +238,6 @@
     <Compile Include="UI\Converters\BitmapImageConverter.cs" />
     <Compile Include="UI\Converters\EnumDescriptionConverter.cs" />
     <Compile Include="UI\Converters\PercentageConverter.cs" />
-    <Compile Include="UI\ObservableObject.cs" />
-    <Compile Include="UI\RelayCommand.cs" />
     <Compile Include="Commands\FamiliesPanel\Events\DownloadFamilyEvent.cs" />
     <Compile Include="Commands\FamiliesPanel\MVVM\FamilyItem.cs" />
     <Compile Include="Commands\FamiliesPanel\MVVM\FolderItem.cs" />
@@ -298,6 +296,8 @@
     <Compile Include="Core\Ribbon\Interfaces\IRibbonManager.cs" />
     <Compile Include="Core\Ribbon\RibbonManager.cs" />
     <Compile Include="Core\Ribbon\UIBuilder.cs" />
+    <Compile Include="UI\ObservableObject.cs" />
+    <Compile Include="UI\RelayCommand.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

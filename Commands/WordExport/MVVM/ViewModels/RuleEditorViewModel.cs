@@ -1,15 +1,12 @@
 using GongSolutions.Wpf.DragDrop;
-using ProjetaARQ.UI.Core;
 using ProjetaARQ.Commands.WordExport.Models;
 using ProjetaARQ.Commands.WordExport.MVVM.ViewModels.Actions;
 using ProjetaARQ.Commands.WordExport.Services;
 using ProjetaARQ.Commands.WordExport.Services.GongHandlers;
 using ProjetaARQ.Commands.WordExport.Services.UndoableCommands;
-using System;
 using System.Collections.ObjectModel;
-using System.Data.Linq;
 using System.IO;
-using System.Linq;
+using ProjetaARQ.UI;
 
 namespace ProjetaARQ.Commands.WordExport.MVVM.ViewModels
 {

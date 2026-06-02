@@ -1,8 +1,8 @@
 using GongSolutions.Wpf.DragDrop;
-using ProjetaARQ.UI.Core;
 using ProjetaARQ.Commands.WordExport.MVVM.ViewModels;
 using System;
 using System.Windows;
+using ProjetaARQ.UI;
 
 namespace ProjetaARQ.Commands.WordExport.Services.GongHandlers
 {

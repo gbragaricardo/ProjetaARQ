@@ -1,9 +1,8 @@
 using Autodesk.Revit.Attributes;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
-using ProjetaARQ.Revit.Base;
-using ProjetaARQ.Revit.UI;
-using System;
+using ProjetaARQ.Core.Ribbon;
+using ProjetaARQ.Services.Revit;
 
 namespace ProjetaARQ.Commands.FamiliesPane.Commands
 {

@@ -13,7 +13,7 @@
              Height="Auto">
 
     <UserControl.Resources>
-        <ResourceDictionary Source="/ProjetaARQ;component/Features/WordExport/MVVM/Resources/DataTemplates.xaml"/>
+        <ResourceDictionary Source="/ProjetaARQ;component/Commands/WordExport/MVVM/Resources/DataTemplates.xaml"/>
     </UserControl.Resources>
 
     <Expander IsExpanded="{Binding IsExpanded, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"

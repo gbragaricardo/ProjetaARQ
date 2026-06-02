@@ -1,15 +1,10 @@
-using ProjetaARQ.UI.Core;
-using ProjetaARQ.Commands.FamiliesPanel.MVVM;
 using ProjetaARQ.Commands.WordExport.Enums;
 using ProjetaARQ.Commands.WordExport.MVVM.ViewModels.Actions;
 using ProjetaARQ.Commands.WordExport.Services;
 using ProjetaARQ.Commands.WordExport.Services.UndoableCommands;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using ProjetaARQ.UI;
 
 namespace ProjetaARQ.Commands.WordExport.MVVM.ViewModels
 {

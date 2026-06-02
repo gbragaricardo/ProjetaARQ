@@ -45,7 +45,7 @@ namespace ProjetaARQ.Core.Ribbon
             var familiesPaneButton = _ribbonManager.AddPushButton(
                 "FamiliesPaneButton",
                 "Showroom\nBIM",
-                "ProjetaARQ.Commands.FamiliesPanel.Commands.FamiliesPaneButton",
+                "ProjetaARQ.Commands.FamiliesPane.Commands.FamiliesPaneButton",
                 mainPanel,
                 "ShowRoom de Famílias de Arquitetura",
                 "catalogo.png",

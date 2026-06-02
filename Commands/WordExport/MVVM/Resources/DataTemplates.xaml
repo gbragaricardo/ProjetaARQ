@@ -13,7 +13,7 @@
         <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
         <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Light.Crimson.xaml" />
-        <ResourceDictionary Source="/ProjetaARQ;component/Features/WordExport/Styles/AnimatedOverlayMenuStyle.xaml"/>
+        <ResourceDictionary Source="/ProjetaARQ;component/Commands/WordExport/Styles/AnimatedOverlayMenuStyle.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
     <converters:EnumDescriptionConverter x:Key="EnumToDescriptionConverter" />

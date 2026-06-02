@@ -3,7 +3,7 @@ using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
 using ProjetaARQ.Commands.WordExport.MVVM.ViewModels;
 using ProjetaARQ.Commands.WordExport.MVVM.Views;
-using ProjetaARQ.Revit.Base;
+using ProjetaARQ.Services.Revit;
 using System;
 using System.Windows.Interop;
 

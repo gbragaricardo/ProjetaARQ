@@ -1,12 +1,6 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ProjetaARQ.UI.Core;
-using ProjetaARQ.Commands.FamiliesPanel.MVVM;
 using ProjetaARQ.Commands.WordExport.Models;
-using ProjetaARQ.Commands.WordExport.Services;
+using ProjetaARQ.UI;
 
 namespace ProjetaARQ.Commands.WordExport.MVVM.ViewModels
 {

@@ -16,7 +16,7 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/ProjetaARQ;component/Features/WordExport/MVVM/Resources/DataTemplates.xaml"/>
+                <ResourceDictionary Source="/ProjetaARQ;component/Commands/WordExport/MVVM/Resources/DataTemplates.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
             <Style TargetType="TextBlock">

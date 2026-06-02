@@ -9,7 +9,7 @@ namespace ProjetaARQ.Commands.WordExport.Services
 {
     internal class PresetService
     {
-        private readonly string _presetsFolderPath = "D:\\ricardo_ed\\ProjetaARQ\\jsons";
+        private readonly string _presetsFolderPath = "G:\\Other computers\\Meu laptop\\Projeta\\Disciplinas\\Arquitetura\\Plugin\\";
 
         public void SavePreset(PresetModel preset, string filePath)
         {

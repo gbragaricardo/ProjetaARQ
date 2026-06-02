@@ -1,13 +1,8 @@
-using ProjetaARQ.UI.Core;
 using ProjetaARQ.Commands.WordExport.Models;
-using ProjetaARQ.Commands.WordExport.MVVM.ViewModels.Actions;
 using ProjetaARQ.Commands.WordExport.Services;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using ProjetaARQ.UI;
 
 namespace ProjetaARQ.Commands.WordExport.MVVM.ViewModels
 {

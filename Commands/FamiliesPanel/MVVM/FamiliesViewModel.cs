@@ -1,10 +1,9 @@
 using Autodesk.Revit.UI;
 using ControlzEx.Theming;
 using Microsoft.WindowsAPICodePack.Dialogs;
-using Microsoft.WindowsAPICodePack.Shell;
-using ProjetaARQ.Core.Services;
-using ProjetaARQ.UI.Core;
 using ProjetaARQ.Commands.FamiliesPanel.Events;
+using ProjetaARQ.Services;
+using ProjetaARQ.UI;
 using System;
 using System.Collections.ObjectModel;
 using System.IO;
