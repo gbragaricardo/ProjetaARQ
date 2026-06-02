@@ -3,7 +3,7 @@ using ControlzEx.Theming;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using ProjetaARQ.Commands.FamiliesPanel.Events;
 using ProjetaARQ.Services;
-using ProjetaARQ.UI;
+using ProjetaARQ.UI.Core;
 using System;
 using System.Collections.ObjectModel;
 using System.IO;

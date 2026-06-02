@@ -4,7 +4,7 @@ using GongSolutions.Wpf.DragDrop;
 using System.Windows;
 using ProjetaARQ.Commands.WordExport.MVVM.ViewModels;
 using ProjetaARQ.Commands.WordExport.Services.UndoableCommands;
-using ProjetaARQ.UI;
+using ProjetaARQ.UI.Core;
 
 namespace ProjetaARQ.Commands.WordExport.Services.GongHandlers
 {

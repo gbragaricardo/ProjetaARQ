@@ -1,16 +1,22 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.12.35527.113 d17.12
+# Visual Studio Version 18
+VisualStudioVersion = 18.2.11408.102 d18.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjetaARQ", "ProjetaARQ.csproj", "{4363D38C-4873-40FA-9BB4-B601742A0B7C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug 2024|Any CPU = Debug 2024|Any CPU
+		Debug 2026|Any CPU = Debug 2026|Any CPU
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4363D38C-4873-40FA-9BB4-B601742A0B7C}.Debug 2024|Any CPU.ActiveCfg = Revit2024|Any CPU
+		{4363D38C-4873-40FA-9BB4-B601742A0B7C}.Debug 2024|Any CPU.Build.0 = Revit2024|Any CPU
+		{4363D38C-4873-40FA-9BB4-B601742A0B7C}.Debug 2026|Any CPU.ActiveCfg = Revit2026|Any CPU
+		{4363D38C-4873-40FA-9BB4-B601742A0B7C}.Debug 2026|Any CPU.Build.0 = Revit2026|Any CPU
 		{4363D38C-4873-40FA-9BB4-B601742A0B7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4363D38C-4873-40FA-9BB4-B601742A0B7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4363D38C-4873-40FA-9BB4-B601742A0B7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -18,5 +24,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9340A150-C009-4547-A3BF-7CB8F336E323}
 	EndGlobalSection
 EndGlobal

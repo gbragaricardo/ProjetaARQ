@@ -2,7 +2,7 @@ using ProjetaARQ.Commands.WordExport.Models;
 using ProjetaARQ.Commands.WordExport.Services;
 using System;
 using System.Collections.ObjectModel;
-using ProjetaARQ.UI;
+using ProjetaARQ.UI.Core;
 
 namespace ProjetaARQ.Commands.WordExport.MVVM.ViewModels
 {

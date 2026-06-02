@@ -1,4 +1,4 @@
-using ProjetaARQ.UI;
+using ProjetaARQ.UI.Core;
 
 namespace ProjetaARQ.Commands.WordExport.MVVM.ViewModels.Actions
 {

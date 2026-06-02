@@ -1,0 +1,52 @@
+﻿name: Publicar Release do Plugin
+
+# O pipeline só vai rodar quando você criar e enviar uma tag de versão (ex: v1.0.0)
+on:
+  push:
+    tags:
+      - '*.*.*.*'
+
+jobs:
+  build-and-release:
+    name: Build e Criar Release
+    runs-on: windows-latest
+
+    # Dá permissão para o robô criar a página de Release e anexar arquivos
+    permissions:
+      contents: write
+
+    steps:
+    # 1. Baixa o seu código-fonte para dentro do servidor do GitHub
+    - name: Baixar o código-fonte
+      uses: actions/checkout@v4
+
+    # 2. Instala o motor do .NET moderno na máquina virtual
+    - name: Configurar o .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x'
+
+    # 2.5 PREPARA O MOTOR CLÁSSICO DO VISUAL STUDIO (Para ler as referências COM/Windows)
+    - name: Configurar o MSBuild
+      uses: microsoft/setup-msbuild@v2
+
+    # 3. Compila a versão 2024 forçando a otimização de performance (USANDO MSBUILD)
+    - name: Compilar Revit 2024
+      run: msbuild ProjetaARQ.csproj -restore -p:Configuration=Revit2024 -p:Optimize=true
+
+    # 4. Compila a versão 2026 forçando a otimização de performance (USANDO MSBUILD)
+    - name: Compilar Revit 2026
+      run: msbuild ProjetaARQ.csproj -restore -p:Configuration=Revit2026 -p:Optimize=true
+
+    # 5. Compacta a pasta inteira preservando a hierarquia (Releases/2024 e Releases/2026)
+    - name: Criar Pacote ZIP Unificado
+      shell: pwsh
+      run: |
+        Compress-Archive -Path "Releases" -DestinationPath "ProjetaARQ.zip"
+
+    # 6. Cria a Release oficial no GitHub e faz o upload do Zip
+    - name: Publicar no GitHub Releases
+      uses: softprops/action-gh-release@v2
+      with:
+        files: ProjetaARQ.zip
+        generate_release_notes: true

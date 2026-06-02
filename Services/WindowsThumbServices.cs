@@ -1,11 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.WindowsAPICodePack.Shell;
-using System.Windows.Media.Imaging;
+using System;
+using System.Drawing.Imaging;
 using System.IO;
+using System.Windows.Media.Imaging;
 
 namespace ProjetaARQ.Services
 {
@@ -40,24 +37,35 @@ namespace ProjetaARQ.Services
 
             try
             {
-                // Usa a biblioteca para carregar o arquivo como um objeto do Shell
-                ShellFile shellFile = ShellFile.FromFilePath(filePath);
+                using (ShellFile shellFile = ShellFile.FromFilePath(filePath))
+                {
+                    shellFile.Thumbnail.FormatOption = ShellThumbnailFormatOption.ThumbnailOnly;
 
-                // Pede ao Shell para gerar a miniatura em um tamanho médio
-                shellFile.Thumbnail.FormatOption = ShellThumbnailFormatOption.ThumbnailOnly;
-                var shellBitmap = shellFile.Thumbnail.LargeBitmap; // Você pode escolher outros tamanhos como Large, Small, etc.
+                    // Pega o Bitmap nativo do pacote 1.1.5
+                    using (var shellBitmap = shellFile.Thumbnail.LargeBitmap)
+                    {
+                        // Cria um stream de memória para salvar a imagem
+                        using (var memoryStream = new MemoryStream())
+                        {
+                            // Esse é o método correto e real da classe Bitmap!
+                            shellBitmap.Save(memoryStream, ImageFormat.Png);
+                            memoryStream.Position = 0; // Volta o ponteiro para o início da leitura
 
-                // Converte o Bitmap do Shell para um BitmapSource que o WPF entende
-                // (Este método de conversão é necessário)
-                return System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(
-                    shellBitmap.GetHbitmap(),
-                    System.IntPtr.Zero,
-                    System.Windows.Int32Rect.Empty,
-                    BitmapSizeOptions.FromEmptyOptions());
+                            // Converte o Stream para o formato que o WPF (MahApps) entende
+                            BitmapImage bitmapImage = new BitmapImage();
+                            bitmapImage.BeginInit();
+                            bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+                            bitmapImage.StreamSource = memoryStream;
+                            bitmapImage.EndInit();
+                            bitmapImage.Freeze(); // Otimização para UI
+
+                            return bitmapImage;
+                        }
+                    }
+                }
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
-                // Pode falhar se o arquivo estiver corrompido ou se o handler do Revit não estiver presente
                 System.Diagnostics.Debug.WriteLine($"Erro ao obter thumbnail para {filePath}: {ex.Message}");
                 return null;
             }

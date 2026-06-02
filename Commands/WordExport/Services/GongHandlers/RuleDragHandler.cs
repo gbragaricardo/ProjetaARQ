@@ -2,7 +2,7 @@ using GongSolutions.Wpf.DragDrop;
 using ProjetaARQ.Commands.WordExport.MVVM.ViewModels;
 using System;
 using System.Windows;
-using ProjetaARQ.UI;
+using ProjetaARQ.UI.Core;
 
 namespace ProjetaARQ.Commands.WordExport.Services.GongHandlers
 {
