@@ -1,8 +1,8 @@
-﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <RevitAddIns>
 	<AddIn Type="Application">
 		<Name>ProjetaARQ</Name>
-		<FullClassName>ProjetaARQ.AddinApplication</FullClassName>
+		<FullClassName>ProjetaARQ.Core.AddinApplication</FullClassName>
 		<Description>Grupo Projeta - Arquitetura</Description>
 		<VisibilityMode>AlwaysVisible</VisibilityMode>
 		<Assembly>ProjetaARQ/ProjetaARQ.dll</Assembly>

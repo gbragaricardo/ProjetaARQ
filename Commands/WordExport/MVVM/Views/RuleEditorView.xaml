@@ -1,0 +1,128 @@
+<UserControl x:Class="ProjetaARQ.Commands.WordExport.MVVM.Views.RuleEditorView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ProjetaARQ.Commands.WordExport.MVVM.Views"
+             xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             xmlns:viewModel="clr-namespace:ProjetaARQ.Commands.WordExport.MVVM.ViewModels"
+             xmlns:dd="urn:gong-wpf-dragdrop"
+             xmlns:converters="clr-namespace:ProjetaARQ.UI.Core.Converters"
+             d:DataContext="{d:DesignInstance viewModel:RuleEditorViewModel, IsDesignTimeCreatable=True}"
+             mc:Ignorable="d" 
+             d:DesignHeight="780" d:DesignWidth="740"
+             Background="Transparent">
+
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/ProjetaARQ;component/Commands/WordExport/MVVM/Resources/DataTemplates.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <converters:BoolToVisibleConverter x:Key="BoolToVisible"/>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        
+        <ScrollViewer Grid.Row="1">
+            <ItemsControl ItemsSource="{Binding RuleCardList}"
+                          dd:DragDrop.IsDropTarget="True"
+                          dd:DragDrop.IsDragSource="True"
+                          dd:DragDrop.DragHandler="{Binding RuleDragHandler}"
+                          dd:DragDrop.DropHandler="{Binding RuleDropHandler}"
+                          dd:DragDrop.UseDefaultDragAdorner="True">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <local:RuleCard Margin="10"/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Vertical"
+                                    VerticalAlignment="Stretch"
+                                    Background="Transparent"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+        </ScrollViewer>
+
+        <Border Grid.Row="0"
+                Padding="10"
+                Background="Transparent"
+                AllowDrop="True"
+                dd:DragDrop.IsDropTarget="True"
+                dd:DragDrop.DropHandler="{Binding DeleteDropHandler}"
+                Visibility="{Binding RuleDragHandler.AddBorder, 
+                             UpdateSourceTrigger=PropertyChanged,
+                             Converter={StaticResource BoolToVisible}}">
+
+            <StackPanel Orientation="Horizontal">
+
+                <Border>
+                    <Button Command="{Binding AddRuleCommand}"
+                            Style="{StaticResource MahApps.Styles.Button.Chromeless}">
+
+                        <StackPanel Orientation="Horizontal">
+                            <iconPacks:PackIconMaterialDesign Kind="Add"
+                                                              Margin="0 0 5 0"/>
+                            <TextBlock Text="ADICIONAR REGRA" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
+                </Border>
+
+                <Border Margin="15 0">
+                    <Button Command="{Binding SaveCommand}"
+                            Style="{StaticResource MahApps.Styles.Button.Chromeless}">
+
+                        <StackPanel Orientation="Horizontal">
+                            <iconPacks:PackIconMaterial 
+                                Kind="ContentSave"
+                                Margin="0 0 5 0"/>
+                            <TextBlock Text="SALVAR" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
+                </Border>
+
+                <Border Margin="15 0">
+                    <Button Command="{Binding ExportCommand}"
+                            Style="{StaticResource MahApps.Styles.Button.Chromeless}">
+
+                        <StackPanel Orientation="Horizontal">
+                            <iconPacks:PackIconMaterial 
+                                Kind="FileWord"
+                                Margin="0 0 5 0"/>
+                            <TextBlock Text="EXPORTAR TESTE" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
+                </Border>
+
+            </StackPanel>
+        </Border>
+
+        <Border Grid.Row="1"
+                Background="{DynamicResource MahApps.Brushes.Accent}"
+                AllowDrop="True"
+                dd:DragDrop.IsDropTarget="True"
+                dd:DragDrop.DropHandler="{Binding DeleteDropHandler}"
+                Visibility="{Binding RuleDragHandler.DeleteBorder, 
+                             UpdateSourceTrigger=PropertyChanged,
+                             Converter={StaticResource BoolToVisible}}">
+            
+            <StackPanel Orientation="Horizontal" Opacity="0.5">
+                <iconPacks:PackIconMaterial Kind="TrashCanOutline" VerticalAlignment="Center" Margin="10,0,10,0"/>
+                <TextBlock Text="ARRASTE AQUI PARA APAGAR A REGRA" VerticalAlignment="Center"/>
+            </StackPanel>
+        </Border>
+
+
+    </Grid>
+</UserControl>
