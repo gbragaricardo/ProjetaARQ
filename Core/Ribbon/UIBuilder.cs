@@ -57,7 +57,7 @@ namespace ProjetaARQ.Core.Ribbon
                 mainPanel,
                 "Em Desenvolvimento",
                 "word.png",
-                true);
+                false);
 
 
             #endregion
