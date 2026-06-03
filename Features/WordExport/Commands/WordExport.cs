@@ -1,16 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Autodesk.Revit.Attributes;
+﻿using Autodesk.Revit.Attributes;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
-using ProjetaARQ.Features.Test.MVVM;
 using ProjetaARQ.Features.WordExport.MVVM;
-using ProjetaARQ.Features.WordExport.Services;
-using ProjetaARQ.Revit.Base;
-using ProjetaARQ.Revit.UI;
+using ProjetaARQ.Services.Revit;
 
 namespace ProjetaARQ.Features.WordExport.Commands
 {
