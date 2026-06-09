@@ -1,6 +1,6 @@
 using Autodesk.Revit.UI;
 
-namespace ProjetaARQ.Core.Ribbon.Interfaces
+namespace ProjetaARQ.Core.Ribbon
 {
     public interface IDockablePaneManager
     {

@@ -98,6 +98,10 @@
 	  <None Include=".github\workflows\deploy-revit.yml" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="Core\Services\" />
+	</ItemGroup>
+
 	<Target Name="LocalReleaseAndDeploy" AfterTargets="Build" Condition="'$(RevitYear)' != ''">
 		<PropertyGroup>
 			<ReleaseRoot>$(ProjectDir)Releases\$(RevitYear)</ReleaseRoot>

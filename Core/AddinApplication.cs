@@ -3,7 +3,6 @@ using System.IO;
 using System.Reflection;
 using Autodesk.Revit.UI;
 using ProjetaARQ.Core.Ribbon;
-using ProjetaARQ.Core.Ribbon.Interfaces;
 
 namespace ProjetaARQ.Core
 {

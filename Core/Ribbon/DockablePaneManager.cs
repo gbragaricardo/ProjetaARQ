@@ -1,7 +1,6 @@
 using Autodesk.Revit.UI;
 using ProjetaARQ.Commands.FamiliesPanel.MVVM;
 using ProjetaARQ.Services.Revit;
-using ProjetaARQ.Core.Ribbon.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;

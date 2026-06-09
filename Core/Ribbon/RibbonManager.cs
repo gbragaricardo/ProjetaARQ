@@ -4,7 +4,6 @@ using System.Reflection;
 using System.Windows.Media.Imaging;
 using Autodesk.Revit.UI;
 using ProjetaARQ.Services;
-using ProjetaARQ.Core.Ribbon.Interfaces;
 
 namespace ProjetaARQ.Core.Ribbon
 {
