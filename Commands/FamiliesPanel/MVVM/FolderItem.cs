@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProjetaARQ.Commands.FamiliesPanel.MVVM
 {
-    internal class FolderItem
+    public class FolderItem
     {
         public string Name { get; set; }
         public string Path { get; set; }

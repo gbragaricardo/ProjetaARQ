@@ -9,7 +9,7 @@ using System.Windows.Media.Imaging;
 
 namespace ProjetaARQ.Commands.FamiliesPanel.MVVM
 {
-    internal class FamilyItem
+    public class FamilyItem
     {
         public string Name { get; set; }
         public string UpperName { get; set; }

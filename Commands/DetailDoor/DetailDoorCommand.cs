@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace ProjetaARQ.Commands.DetailDoor
 {
     [Transaction(TransactionMode.Manual)]
-    public class Command : IExternalCommand
+    public class DetailDoorCommand : IExternalCommand
     {
         public Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)
         {

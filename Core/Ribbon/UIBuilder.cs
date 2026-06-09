@@ -1,4 +1,7 @@
 using Autodesk.Revit.UI;
+using ProjetaARQ.Commands.DetailDoor;
+using ProjetaARQ.Commands.FamiliesPane.Commands;
+using ProjetaARQ.Commands.WordExport.Commands;
 
 namespace ProjetaARQ.Core.Ribbon
 {
@@ -35,23 +38,32 @@ namespace ProjetaARQ.Core.Ribbon
             #endregion
 
             #region Buttons
-            var familiesPaneButton = _ribbonManager.AddPushButton(
+            _ribbonManager.AddPushButton(
                 "FamiliesPaneButton",
                 "Showroom\nBIM",
-                "ProjetaARQ.Commands.FamiliesPane.Commands.FamiliesPaneButton",
+                typeof(FamiliesPaneButton).FullName,
                 mainPanel,
                 "ShowRoom de Famílias de Arquitetura",
                 "catalogo.png",
                 true);
 
-            var testButton = _ribbonManager.AddPushButton(
+            _ribbonManager.AddPushButton(
                 "DevButton",
                 "Memorial\nDescritivo",
-                "ProjetaARQ.Commands.WordExport.Commands.WordExport",
+                typeof(WordExport).FullName,
                 mainPanel,
                 "Em Desenvolvimento",
                 "word.png",
                 false);
+
+            _ribbonManager.AddPushButton(
+                "DetailDoorButton",
+                "Detalhar\nPortas",
+                typeof(DetailDoorCommand).FullName,
+                mainPanel,
+                "Exportar Memorial Descritivo",
+                "detail_door.png",
+                true);
 
 
             #endregion

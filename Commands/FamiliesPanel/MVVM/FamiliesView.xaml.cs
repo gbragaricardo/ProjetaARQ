@@ -11,7 +11,7 @@ namespace ProjetaARQ.Commands.FamiliesPanel.MVVM
     /// </summary>
     public partial class FamiliesView : Page, IDockablePaneProvider
     {
-        internal FamiliesView(FamiliesViewModel viewModel)
+        public FamiliesView(FamiliesViewModel viewModel)
         {
             InitializeComponent();
             DataContext = viewModel;

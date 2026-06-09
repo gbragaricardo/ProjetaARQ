@@ -20,8 +20,9 @@ namespace ProjetaARQ.Commands.DetailDoor
             if (commandData.Application.ActiveUIDocument == null)
                 return Result.Failure("Nenhum projeto aberto.");
 
+            TaskDialog.Show("TESTE", "TESTADO");
+                
             // Abre a janela...
-
             return Result.Success();
         }
     }

@@ -2,6 +2,7 @@ using Autodesk.Revit.UI;
 using Microsoft.Extensions.DependencyInjection;
 using ProjetaARQ.Core.DI;
 using ProjetaARQ.Core.Ribbon;
+using ProjetaARQ.Core.Services;
 using System;
 using System.IO;
 using System.Reflection;
@@ -14,18 +15,21 @@ namespace ProjetaARQ.Core
 
         public Result OnStartup(UIControlledApplication application)
         {
+            AssemblyResolver.Register(application, "ProjetaARQ");
+
             var services = new ServiceCollection();
 
+            services.AddSingleton(application);
+            services.AddSingleton<IRibbonManager, RibbonManager>();
+            services.AddSingleton<IDockablePaneManager, DockablePaneManager>();
+            services.AddSingleton<UIBuilder>();
+
             services.ConfigureAllModules();
+
             Provider = services.BuildServiceProvider();
 
-            ConfigureAssemblyResolve(application);
 
-            // 2 - Inicializa o plugin na UI
-            IRibbonManager ribbonManager = new RibbonManager();
-            IDockablePaneManager dockablePaneManager = new DockablePaneManager(application);
-
-            UIBuilder uiBuilder = new UIBuilder(application, ribbonManager, dockablePaneManager);
+            var uiBuilder = Provider.GetRequiredService<UIBuilder>();
             uiBuilder.Build();
 
 
@@ -35,36 +39,6 @@ namespace ProjetaARQ.Core
 
         public Result OnShutdown(UIControlledApplication application)
             => Result.Succeeded;
-
-
-        /// <summary>
-        /// Define onde estarão as dependencias e pacotes externos
-        /// </summary>
-        /// <param name="app"></param>
-        private void ConfigureAssemblyResolve(UIControlledApplication app)
-        {
-            // 1. Pega a versão do Revit dinamicamente (ex: "2024")
-            string revitVersion = app.ControlledApplication.VersionNumber;
-
-            // 2. Pega o caminho da pasta do add-in 
-            string addinPath = Path.Combine(
-                Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-                "Autodesk",
-                "Revit",
-                "Addins",
-                revitVersion,
-                "ProjetaARQ"
-            );
-
-            AppDomain.CurrentDomain.AssemblyResolve += (sender, args) =>
-            {
-                string assemblyName = new AssemblyName(args.Name).Name;
-                string assemblyPath = Path.Combine(addinPath, $"{assemblyName}.dll");
-
-                return File.Exists(assemblyPath)
-                    ? Assembly.LoadFrom(assemblyPath)
-                    : null;
-            };
-        }
     }
 }
+

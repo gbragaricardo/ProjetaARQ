@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 
 namespace ProjetaARQ.Commands.FamiliesPanel.MVVM
 {
-    internal class FamiliesViewModel : ObservableObject
+    public class FamiliesViewModel : ObservableObject
     {
         public ObservableCollection<FolderItem> SubFolders { get; set; } = new ObservableCollection<FolderItem>();
         public ObservableCollection<FolderItem> SelectedSubFolders { get; set; } = new ObservableCollection<FolderItem>();
