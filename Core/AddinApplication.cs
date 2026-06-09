@@ -1,17 +1,24 @@
+using Autodesk.Revit.UI;
+using Microsoft.Extensions.DependencyInjection;
+using ProjetaARQ.Core.DI;
+using ProjetaARQ.Core.Ribbon;
 using System;
 using System.IO;
 using System.Reflection;
-using Autodesk.Revit.UI;
-using ProjetaARQ.Core.Ribbon;
 
 namespace ProjetaARQ.Core
 {
     public class AddinApplication : IExternalApplication
     {
+        public static IServiceProvider Provider { get; private set; }
 
         public Result OnStartup(UIControlledApplication application)
         {
-            // 1 - Carrega os pacotes externos na pasta addins/ProjetaARQ/
+            var services = new ServiceCollection();
+
+            services.ConfigureAllModules();
+            Provider = services.BuildServiceProvider();
+
             ConfigureAssemblyResolve(application);
 
             // 2 - Inicializa o plugin na UI

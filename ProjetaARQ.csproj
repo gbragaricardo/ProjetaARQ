@@ -68,6 +68,7 @@
 		<PackageReference Include="Microsoft-WindowsAPICodePack-Core" Version="1.1.5" />
 		<PackageReference Include="Microsoft-WindowsAPICodePack-Shell" Version="1.1.5" />
 		<PackageReference Include="System.Configuration.ConfigurationManager" Version="10.0.8" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -96,10 +97,6 @@
 
 	<ItemGroup>
 	  <None Include=".github\workflows\deploy-revit.yml" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Core\Services\" />
 	</ItemGroup>
 
 	<Target Name="LocalReleaseAndDeploy" AfterTargets="Build" Condition="'$(RevitYear)' != ''">
