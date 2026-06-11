@@ -120,7 +120,7 @@ namespace ProjetaARQ.Commands.DetailDoor
                         // 1. Planta (Horizontal)
                         ViewSection planView = AssemblyViewUtils.CreateDetailSection(_revitContext.Doc, assemblyInstance.Id, AssemblyDetailViewOrientation.HorizontalDetail);
                         SafeSetName(planView, $"{typeMark} - PLANTA");
-                         if (planTemplate != null) planView.ViewTemplateId = planTemplate.Id;
+                         //if (planTemplate != null) planView.ViewTemplateId = planTemplate.Id;
 
                         // 2. Vista Frontal (Elevação)
                         ViewSection frontView = AssemblyViewUtils.CreateDetailSection(_revitContext.Doc, assemblyInstance.Id, AssemblyDetailViewOrientation.ElevationFront);

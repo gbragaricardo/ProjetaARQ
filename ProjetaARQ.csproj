@@ -74,6 +74,7 @@
 		<PackageReference Include="System.Configuration.ConfigurationManager" Version="10.0.8" />
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
 		<PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="8.0.0" />
+		<PackageReference Include="WPF-UI" Version="4.3.0" />
 	</ItemGroup>
 
 	<ItemGroup>
