@@ -13,6 +13,9 @@ namespace ProjetaARQ.Core.Commands
         {
             using (var scope = AddinApplication.Provider.CreateScope())
             {
+                var revitContext = scope.ServiceProvider.GetRequiredService<IRevitContext>() as RevitContext;
+                revitContext?.Initialize(commandData);
+
                 var telemetry = scope.ServiceProvider.GetRequiredService<IAppTelemetry>();
                 string commandName = typeof(THandler).Name;
 

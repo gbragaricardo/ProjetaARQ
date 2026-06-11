@@ -10,6 +10,7 @@ namespace ProjetaARQ.Core.DI
         public static IServiceCollection ConfigureAllModules(this IServiceCollection services)
         {
             services.AddSingleton<IAppTelemetry, AppTelemetry>();
+            services.AddScoped<IRevitContext, RevitContext>();
 
             services.AddSingleton<FamiliesViewModel>();
             services.AddSingleton<FamiliesView>();
