@@ -8,6 +8,8 @@
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     Width="450"
     Height="Auto"
+    d:DataContext="{d:DesignInstance local:DetailDoorViewModel,
+                                     IsDesignTimeCreatable=True}"
     ExtendsContentIntoTitleBar="True"
     WindowBackdropType="Mica"
     WindowStartupLocation="CenterScreen"
@@ -111,82 +113,35 @@
                     Grid.Row="1"
                     Grid.Column="0"
                     Padding="8">
-                    <StackPanel Orientation="Vertical">
-                        <CheckBox Padding="0" Content="Ortogonal 3D" />
-                        <ComboBox
-                            Margin="0,0,0,16"
-                            IsEditable="True"
-                            IsReadOnly="True"
-                            Text="Selecione o Template" />
+                    <ItemsControl ItemsSource="{Binding ViewOptionItems}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <UniformGrid VerticalAlignment="Top" Columns="2" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
 
-                        <CheckBox Padding="0" Content="Planta da Porta" />
-                        <ComboBox
-                            Margin="0,0,0,16"
-                            IsEditable="True"
-                            IsReadOnly="True"
-                            Text="Selecione o Template" />
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate DataType="{x:Type local:ViewOptionItem}">
+                                <StackPanel>
 
-                        <CheckBox Padding="0" Content="Corte A" />
-                        <ComboBox
-                            Margin="0,0,0,16"
-                            IsEditable="True"
-                            IsReadOnly="True"
-                            Text="Selecione o Template" />
+                                    <CheckBox
+                                        Padding="0"
+                                        Content="{Binding}"
+                                        IsChecked="{Binding IsSelected}" />
 
-                        <CheckBox Padding="0" Content="Corte B" />
-                        <ComboBox
-                            Margin="0,0,0,16"
-                            IsEditable="True"
-                            IsReadOnly="True"
-                            Text="Selecione o Template" />
+                                    <ComboBox
+                                        Margin="0,0,0,16"
+                                        IsEditable="True"
+                                        IsEnabled="{Binding IsSelected}"
+                                        IsReadOnly="True"
+                                        SelectedItem="{Binding SelectedTemplate}"
+                                        Text="Select a Template" />
 
-                        <CheckBox Padding="0" Content="Elevação de Topo" />
-                        <ComboBox
-                            IsEditable="True"
-                            IsReadOnly="True"
-                            Text="Selecione o Template" />
-                    </StackPanel>
-                </Border>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
 
-                <Border
-                    Grid.Row="1"
-                    Grid.Column="1"
-                    Padding="8">
-                    <StackPanel Orientation="Vertical">
-                        <CheckBox Padding="0" Content="Elevação Inferior" />
-                        <ComboBox
-                            Margin="0,0,0,16"
-                            IsEditable="True"
-                            IsReadOnly="True"
-                            Text="Selecione o Template" />
-
-                        <CheckBox Padding="0" Content="Elevação Esquerda" />
-                        <ComboBox
-                            Margin="0,0,0,16"
-                            IsEditable="True"
-                            IsReadOnly="True"
-                            Text="Selecione o Template" />
-
-                        <CheckBox Padding="0" Content="Elevação Direita" />
-                        <ComboBox
-                            Margin="0,0,0,16"
-                            IsEditable="True"
-                            IsReadOnly="True"
-                            Text="Selecione o Template" />
-
-                        <CheckBox Padding="0" Content="Elevação Frontal" />
-                        <ComboBox
-                            Margin="0,0,0,16"
-                            IsEditable="True"
-                            IsReadOnly="True"
-                            Text="Selecione o Template" />
-
-                        <CheckBox Padding="0" Content="Elevação Posterior" />
-                        <ComboBox
-                            IsEditable="True"
-                            IsReadOnly="True"
-                            Text="Selecione o Template" />
-                    </StackPanel>
+                    </ItemsControl>
                 </Border>
             </Grid>
 

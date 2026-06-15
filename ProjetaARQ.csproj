@@ -7,7 +7,7 @@
 		<ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
 		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
 		<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
-		
+		<LangVersion>latest</LangVersion>
 		<NoWarn>CA1416</NoWarn>
 		<PlatformTarget>x64</PlatformTarget>
 
@@ -74,7 +74,7 @@
 		<PackageReference Include="Microsoft-WindowsAPICodePack-Shell" Version="1.1.5" />
 		<PackageReference Include="System.Configuration.ConfigurationManager" Version="10.0.8" />
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
-		<PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="8.0.0" />
+		<PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="10.0.1" />
 		<PackageReference Include="WPF-UI" Version="4.3.0" />
 	</ItemGroup>
 
