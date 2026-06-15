@@ -1,11 +1,7 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace ProjetaARQ.UI.Core
+namespace ProjetaARQ.Core.UI
 {
     public class RelayCommand : ICommand
     {

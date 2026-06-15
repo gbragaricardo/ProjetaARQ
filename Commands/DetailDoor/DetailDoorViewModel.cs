@@ -1,4 +1,4 @@
-﻿using ProjetaARQ.UI.Core;
+﻿using ProjetaARQ.Core.UI;
 
 namespace ProjetaARQ.Commands.DetailDoor
 {

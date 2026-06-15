@@ -1,40 +1,42 @@
-<mah:MetroWindow x:Class="ProjetaARQ.Commands.WordExport.MVVM.Views.WordConfigView"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-             xmlns:local="clr-namespace:ProjetaARQ.Commands.WordExport.MVVM.Views"
-             xmlns:converters="clr-namespace:ProjetaARQ.UI.Core.Converters"
-             xmlns:viewModel="clr-namespace:ProjetaARQ.Commands.WordExport.MVVM.ViewModels"
-             xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
-             d:DataContext="{d:DesignInstance viewModel:WordConfigViewModel}"
-             mc:Ignorable="d" 
-             d:DesignHeight="800" d:DesignWidth="800">
+<mah:MetroWindow
+    x:Class="ProjetaARQ.Commands.WordExport.MVVM.Views.WordConfigView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:converters="clr-namespace:ProjetaARQ.UI.Core.Converters"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+    xmlns:local="clr-namespace:ProjetaARQ.Commands.WordExport.MVVM.Views"
+    xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModel="clr-namespace:ProjetaARQ.Commands.WordExport.MVVM.ViewModels"
+    d:DataContext="{d:DesignInstance viewModel:WordConfigViewModel}"
+    d:DesignHeight="800"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
 
     <mah:MetroWindow.LeftWindowCommands>
-        <mah:WindowCommands Margin="0 0 0 0">
+        <mah:WindowCommands Margin="0,0,0,0">
 
             <Button Command="{Binding CurrentView.UndoCommand}">
-                <iconPacks:PackIconMaterialDesign Kind="Save"/>
+                <iconPacks:PackIconMaterialDesign Kind="Save" />
             </Button>
 
             <Button Command="{Binding CurrentView.UndoCommand}">
-                <iconPacks:PackIconMaterialDesign Kind="SaveAs"/>
+                <iconPacks:PackIconMaterialDesign Kind="SaveAs" />
             </Button>
 
             <Button Command="{Binding CurrentView.UndoCommand}">
-                <iconPacks:PackIconMaterialDesign Kind="UndoRound"/>
+                <iconPacks:PackIconMaterialDesign Kind="UndoRound" />
             </Button>
-            
+
             <Button Command="{Binding CurrentView.RedoCommand}">
                 <iconPacks:PackIconMaterialDesign Kind="Redo" />
             </Button>
-            
+
         </mah:WindowCommands>
     </mah:MetroWindow.LeftWindowCommands>
-    
-    
+
+
     <mah:MetroWindow.InputBindings>
         <KeyBinding Command="{Binding CurrentView.UndoCommand}" Gesture="Ctrl+Z" />
         <KeyBinding Command="{Binding CurrentView.RedoCommand}" Gesture="Ctrl+Y" />
@@ -43,181 +45,195 @@
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/ProjetaARQ;component/Commands/WordExport/MVVM/Resources/DataTemplates.xaml"/>
-                <ResourceDictionary Source="/ProjetaARQ;component/Commands/WordExport/Styles/AnimatedOverlayMenuStyle.xaml"/>
+                <ResourceDictionary Source="/ProjetaARQ;component/Commands/WordExport/MVVM/Resources/DataTemplates.xaml" />
+                <ResourceDictionary Source="/ProjetaARQ;component/Commands/WordExport/Styles/AnimatedOverlayMenuStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
-            <converters:BitmapImageConverter x:Key="BitmapImageConverter"/>
+            <converters:BitmapImageConverter x:Key="BitmapImageConverter" />
         </ResourceDictionary>
     </Window.Resources>
 
     <Grid>
-        
+
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="60"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="60" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
         <Border Grid.Column="1">
-            <mah:TransitioningContentControl Content="{Binding CurrentView}"/>
+            <mah:TransitioningContentControl Content="{Binding CurrentView}" />
         </Border>
 
-        <Border x:Name="MenuFixo"
-                Grid.Column="0"
-                Grid.ColumnSpan="2"
-                HorizontalAlignment="Left"
-                Background="{DynamicResource MahApps.Brushes.Gray8}"
-                BorderBrush="DarkGray"
-                BorderThickness="0 0 0 0"
-                Style="{StaticResource AnimatedOverlayMenuStyle}">
+        <Border
+            x:Name="MenuFixo"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            HorizontalAlignment="Left"
+            Background="{DynamicResource MahApps.Brushes.Gray8}"
+            BorderBrush="DarkGray"
+            BorderThickness="0,0,0,0"
+            Style="{StaticResource AnimatedOverlayMenuStyle}">
 
             <Border.Effect>
-                <DropShadowEffect Color="DarkGray"
-                                  ShadowDepth="1"
-                                  Direction="0"
-                                  BlurRadius="8"/>
+                <DropShadowEffect
+                    BlurRadius="8"
+                    Direction="0"
+                    ShadowDepth="1"
+                    Color="DarkGray" />
             </Border.Effect>
 
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-                
+
                 <StackPanel>
-                    <Button Command="{Binding RuleEditorViewCommand}"
-                            Style="{StaticResource MahApps.Styles.Button.Chromeless}"
-                            Cursor="Hand"
-                            HorizontalAlignment="Stretch"
-                            HorizontalContentAlignment="Left"
-                            Height="50" 
-                            Margin="5 5 5 0"   
-                            Foreground="Black" FontSize="20">
-                    
+                    <Button
+                        Height="50"
+                        Margin="5,5,5,0"
+                        HorizontalAlignment="Stretch"
+                        HorizontalContentAlignment="Left"
+                        Command="{Binding RuleEditorViewCommand}"
+                        Cursor="Hand"
+                        FontSize="20"
+                        Foreground="Black"
+                        Style="{StaticResource MahApps.Styles.Button.Chromeless}">
+
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="50"/>
-                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="50" />
+                                <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
 
-                            <iconPacks:PackIconMaterial Kind="FilePlusOutline"
-                                                              Grid.Column="0"
-                                                              HorizontalAlignment="Center"
-                                                              VerticalAlignment="Center"/>
+                            <iconPacks:PackIconMaterial
+                                Grid.Column="0"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Kind="FilePlusOutline" />
 
-                            <TextBlock Text="Novo" 
-                                       Foreground="Black" 
-                                       FontSize="18"
-                                       Grid.Column="1"
-                                       Margin="5 0"
-                                       VerticalAlignment="Center"/>
+                            <TextBlock
+                                Grid.Column="1"
+                                Margin="5,0"
+                                VerticalAlignment="Center"
+                                FontSize="18"
+                                Foreground="Black"
+                                Text="Novo" />
                         </Grid>
                     </Button>
 
-                    <Button Command="{Binding PresetsListViewCommand}"
-                            Style="{StaticResource MahApps.Styles.Button.Chromeless}"
-                            Cursor="Hand"
-                            HorizontalAlignment="Stretch"
-                            HorizontalContentAlignment="Left"
-                            Height="50" 
-                            Margin="5 0 5 5"      
-                            Foreground="Black" FontSize="20">
+                    <Button
+                        Height="50"
+                        Margin="5,0,5,5"
+                        HorizontalAlignment="Stretch"
+                        HorizontalContentAlignment="Left"
+                        Command="{Binding PresetsListViewCommand}"
+                        Cursor="Hand"
+                        FontSize="20"
+                        Foreground="Black"
+                        Style="{StaticResource MahApps.Styles.Button.Chromeless}">
 
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="50"/>
-                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="50" />
+                                <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
 
-                            <iconPacks:PackIconMaterialDesign Kind="Menu"
-                                                              Grid.Column="0"
-                                                              HorizontalAlignment="Center"
-                                                              VerticalAlignment="Center"/>
+                            <iconPacks:PackIconMaterialDesign
+                                Grid.Column="0"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Kind="Menu" />
 
-                            <TextBlock Text="Menu de Presets" 
-                                       Foreground="Black" 
-                                       FontSize="18"
-                                       Grid.Column="1"
-                                       Margin="5 0"
-                                       VerticalAlignment="Center"/>
-
-
-                        </Grid>
-                    </Button>
-
-                    <Button Command="{Binding PresetsListViewCommand}"
-                            Style="{StaticResource MahApps.Styles.Button.Chromeless}"
-                            Cursor="Hand"
-                            HorizontalAlignment="Stretch"
-                            HorizontalContentAlignment="Left"
-                            Height="50" 
-                            Margin="5 0 5 5"      
-                            Foreground="Black" FontSize="20">
-
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="50"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-
-                            <iconPacks:PackIconMaterial Kind="ImageOutline"
-                                                        Grid.Column="0"
-                                                        HorizontalAlignment="Center"
-                                                        VerticalAlignment="Center"/>
-
-                            <TextBlock Text="Imagens" 
-                                       Foreground="Black" 
-                                       FontSize="18"
-                                       Grid.Column="1"
-                                       Margin="5 0"
-                                       VerticalAlignment="Center"/>
+                            <TextBlock
+                                Grid.Column="1"
+                                Margin="5,0"
+                                VerticalAlignment="Center"
+                                FontSize="18"
+                                Foreground="Black"
+                                Text="Menu de Presets" />
 
 
                         </Grid>
                     </Button>
 
-                    <Button Command="{Binding PresetsListViewCommand}"
-                            Style="{StaticResource MahApps.Styles.Button.Chromeless}"
-                            Cursor="Hand"
-                            HorizontalAlignment="Stretch"
-                            HorizontalContentAlignment="Left"
-                            Height="50" 
-                            Margin="5 0 5 5"      
-                            Foreground="Black" FontSize="20">
+                    <Button
+                        Height="50"
+                        Margin="5,0,5,5"
+                        HorizontalAlignment="Stretch"
+                        HorizontalContentAlignment="Left"
+                        Command="{Binding PresetsListViewCommand}"
+                        Cursor="Hand"
+                        FontSize="20"
+                        Foreground="Black"
+                        Style="{StaticResource MahApps.Styles.Button.Chromeless}">
 
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="50"/>
-                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="50" />
+                                <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
 
-                            <iconPacks:PackIconMaterial Kind="FormatText"
-                                                        Grid.Column="0"
-                                                        HorizontalAlignment="Center"
-                                                        VerticalAlignment="Center"/>
+                            <iconPacks:PackIconMaterial
+                                Grid.Column="0"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Kind="ImageOutline" />
 
-                            <TextBlock Text="Blocos de Texto" 
-                                       Foreground="Black" 
-                                       FontSize="18"
-                                       Grid.Column="1"
-                                       Margin="5 0"
-                                       VerticalAlignment="Center"/>
+                            <TextBlock
+                                Grid.Column="1"
+                                Margin="5,0"
+                                VerticalAlignment="Center"
+                                FontSize="18"
+                                Foreground="Black"
+                                Text="Imagens" />
+
+
+                        </Grid>
+                    </Button>
+
+                    <Button
+                        Height="50"
+                        Margin="5,0,5,5"
+                        HorizontalAlignment="Stretch"
+                        HorizontalContentAlignment="Left"
+                        Command="{Binding PresetsListViewCommand}"
+                        Cursor="Hand"
+                        FontSize="20"
+                        Foreground="Black"
+                        Style="{StaticResource MahApps.Styles.Button.Chromeless}">
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="50" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <iconPacks:PackIconMaterial
+                                Grid.Column="0"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Kind="FormatText" />
+
+                            <TextBlock
+                                Grid.Column="1"
+                                Margin="5,0"
+                                VerticalAlignment="Center"
+                                FontSize="18"
+                                Foreground="Black"
+                                Text="Blocos de Texto" />
 
 
                         </Grid>
                     </Button>
                 </StackPanel>
-                <StackPanel Grid.Row="1"
-                            Margin="5">
-                    
-                    <mah:ToggleSwitch>
-                        
-                    </mah:ToggleSwitch>
+                <StackPanel Grid.Row="1" Margin="5">
+
+                    <mah:ToggleSwitch />
                 </StackPanel>
             </Grid>
-            
+
         </Border>
 
     </Grid>
 </mah:MetroWindow>
-   

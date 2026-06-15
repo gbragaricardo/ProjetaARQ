@@ -12,7 +12,8 @@ namespace ProjetaARQ.Commands.DetailDoor
     {
         public void RegisterServices(IServiceCollection services)
         {
-            
+            services.AddTransient<DetailDoorViewModel>();
+            services.AddTransient<DetailDoorView>();
             services.AddTransient<DetailDoorHandler>();
         }
     }

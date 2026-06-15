@@ -3,9 +3,9 @@ using Microsoft.Extensions.DependencyInjection;
 using ProjetaARQ.Core.DI;
 using ProjetaARQ.Core.Ribbon;
 using ProjetaARQ.Core.Services;
+using ProjetaARQ.Core.UI;
 using System;
-using System.IO;
-using System.Reflection;
+
 
 namespace ProjetaARQ.Core
 {
@@ -16,6 +16,8 @@ namespace ProjetaARQ.Core
         public Result OnStartup(UIControlledApplication application)
         {
             AssemblyResolver.Register(application, "ProjetaARQ");
+
+            UiResourceManager.EnsureResources();
 
             var services = new ServiceCollection();
 

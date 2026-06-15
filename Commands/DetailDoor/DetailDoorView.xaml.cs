@@ -1,27 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+﻿using Wpf.Ui.Controls;
 
 namespace ProjetaARQ.Commands.DetailDoor
 {
-    /// <summary>
-    /// Lógica interna para DetailDoorView.xaml
-    /// </summary>
-    public partial class DetailDoorView : Window
+    public partial class DetailDoorView : FluentWindow
     {
-        public DetailDoorView()
+        // O construtor recebe a ViewModel via Injeção de Dependência do nosso contêiner Scoped
+        public DetailDoorView(DetailDoorViewModel viewModel)
         {
             InitializeComponent();
+
+            // Define o DataContext para o MVVM funcionar de forma limpa
+            DataContext = viewModel;
         }
     }
 }

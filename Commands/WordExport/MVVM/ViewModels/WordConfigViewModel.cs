@@ -1,6 +1,6 @@
 using System;
 using ProjetaARQ.Commands.WordExport.Models;
-using ProjetaARQ.UI.Core;
+using ProjetaARQ.Core.UI;
 
 namespace ProjetaARQ.Commands.WordExport.MVVM.ViewModels
 {

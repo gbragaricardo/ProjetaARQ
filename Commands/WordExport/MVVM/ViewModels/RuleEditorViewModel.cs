@@ -6,7 +6,7 @@ using ProjetaARQ.Commands.WordExport.Services.GongHandlers;
 using ProjetaARQ.Commands.WordExport.Services.UndoableCommands;
 using System.Collections.ObjectModel;
 using System.IO;
-using ProjetaARQ.UI.Core;
+using ProjetaARQ.Core.UI;
 
 namespace ProjetaARQ.Commands.WordExport.MVVM.ViewModels
 {

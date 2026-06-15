@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace ProjetaARQ.UI.Core
+namespace ProjetaARQ.Core.UI
 {
     public class ObservableObject : INotifyPropertyChanged
     {

@@ -4,7 +4,7 @@ using ProjetaARQ.Commands.WordExport.Services;
 using ProjetaARQ.Commands.WordExport.Services.UndoableCommands;
 using System;
 using System.Collections.Generic;
-using ProjetaARQ.UI.Core;
+using ProjetaARQ.Core.UI;
 
 namespace ProjetaARQ.Commands.WordExport.MVVM.ViewModels
 {
