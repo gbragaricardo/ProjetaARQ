@@ -1,6 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using ProjetaARQ.Commands.Shared.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,9 +15,9 @@ namespace ProjetaARQ.Commands.DetailDoor
         private string _viewOptionName;
 
         [ObservableProperty]
-        private bool _isSelected;
+        private bool _isChecked;
 
         [ObservableProperty]
-        private string _selectedTemplate;
+        private RevitViewTemplateItem _selectedViewTemplate;
     }
 }

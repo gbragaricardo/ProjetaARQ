@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using ProjetaARQ.Commands.Shared.Services;
 using ProjetaARQ.Core.DI;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,7 @@ namespace ProjetaARQ.Commands.DetailDoor
             services.AddTransient<DetailDoorViewModel>();
             services.AddTransient<DetailDoorView>();
             services.AddTransient<DetailDoorHandler>();
+            services.AddTransient<IViewTemplateService, ViewTemplateService>();
         }
     }
 }
