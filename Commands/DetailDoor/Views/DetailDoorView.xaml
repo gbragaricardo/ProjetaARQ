@@ -1,13 +1,13 @@
 ﻿<ui:FluentWindow
-    x:Class="ProjetaARQ.Commands.DetailDoor.DetailDoorView"
+    x:Class="ProjetaARQ.Commands.DetailDoor.Views.DetailDoorView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:components="clr-namespace:ProjetaARQ.Core.UI.Components"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:ProjetaARQ.Commands.DetailDoor"
-    xmlns:viewModels="clr-namespace:ProjetaARQ.Commands.DetailDoor.ViewModels"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    xmlns:viewModels="clr-namespace:ProjetaARQ.Commands.DetailDoor.ViewModels"
     x:Name="RootWindow"
     Width="450"
     Height="Auto"
@@ -71,12 +71,12 @@
                 </Border>
 
                 <Border Grid.Row="1" Padding="8">
-                    <components:PlaceholderComboBox 
-                        PlaceholderText="Selecione a Fase" 
-                        ItemsSource="{Binding AvailablePhases}"
+                    <components:PlaceholderComboBox
                         DisplayMemberPath="Name"
-                        SelectedValuePath="Id"
-                        SelectedItem="{Binding SelectedPhaseId}"/>
+                        ItemsSource="{Binding AvailablePhases}"
+                        PlaceholderText="Selecione a Fase"
+                        SelectedItem="{Binding SelectedPhaseId}"
+                        SelectedValuePath="Id" />
                 </Border>
             </Grid>
 
@@ -121,7 +121,7 @@
                         </ItemsControl.ItemsPanel>
 
                         <ItemsControl.ItemTemplate>
-                            <DataTemplate DataType="{x:Type local:ViewOptionItem}">
+                            <DataTemplate DataType="{x:Type viewModels:ViewOptionItem}">
                                 <StackPanel Margin="4">
                                     <CheckBox
                                         Padding="0"
@@ -150,6 +150,7 @@
                 Margin="8"
                 Padding="8"
                 HorizontalAlignment="Right"
+                Command="{Binding GenerateAssembliesCommand}"
                 Content="Gerar Montagens" />
         </Grid>
     </Border>

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using ProjetaARQ.Commands.DetailDoor.Services;
 using ProjetaARQ.Commands.DetailDoor.ViewModels;
+using ProjetaARQ.Commands.DetailDoor.Views;
 using ProjetaARQ.Commands.Shared.Services;
 using ProjetaARQ.Core.DI;
 using System;

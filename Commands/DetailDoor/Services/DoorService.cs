@@ -15,9 +15,7 @@ namespace ProjetaARQ.Commands.DetailDoor.Services
             return new FilteredElementCollector(doc)
                  .OfCategory(BuiltInCategory.OST_Doors)
                  .WhereElementIsNotElementType()
-                 .ToElements()
-                 .Where(e => e.CreatedPhaseId == phaseId)
-                 .ToList();
+                 .Where(e => e.CreatedPhaseId == phaseId);
         }
 
         public IEnumerable<RevitPhaseItem> GetPhasesFromDoors(Document doc)

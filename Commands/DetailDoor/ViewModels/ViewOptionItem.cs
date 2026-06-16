@@ -1,13 +1,8 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using Autodesk.Revit.DB;
+using CommunityToolkit.Mvvm.ComponentModel;
 using ProjetaARQ.Commands.Shared.Models;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace ProjetaARQ.Commands.DetailDoor
+namespace ProjetaARQ.Commands.DetailDoor.ViewModels
 {
     public partial class ViewOptionItem : ObservableObject
     {
@@ -19,5 +14,11 @@ namespace ProjetaARQ.Commands.DetailDoor
 
         [ObservableProperty]
         private RevitViewTemplateItem _selectedViewTemplate;
+
+        [ObservableProperty]
+        private bool _isViewOption3D = false;
+
+        [ObservableProperty]
+        private AssemblyDetailViewOrientation _viewOrientation;
     }
 }

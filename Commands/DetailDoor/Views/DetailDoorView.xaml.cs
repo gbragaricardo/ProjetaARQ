@@ -1,7 +1,7 @@
 ﻿using ProjetaARQ.Commands.DetailDoor.ViewModels;
 using Wpf.Ui.Controls;
 
-namespace ProjetaARQ.Commands.DetailDoor
+namespace ProjetaARQ.Commands.DetailDoor.Views
 {
     public partial class DetailDoorView : FluentWindow
     {
@@ -12,6 +12,7 @@ namespace ProjetaARQ.Commands.DetailDoor
 
             // Define o DataContext para o MVVM funcionar de forma limpa
             DataContext = viewModel;
+            viewModel.RequestClose += () => this.DialogResult = true;
         }
     }
 }
