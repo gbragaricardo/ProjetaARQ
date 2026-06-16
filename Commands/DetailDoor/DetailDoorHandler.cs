@@ -1,5 +1,6 @@
 ﻿using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
+using ProjetaARQ.Commands.DetailDoor.ViewModels;
 using ProjetaARQ.Core.DI;
 using ProjetaARQ.Core.Services;
 using System;
@@ -28,6 +29,7 @@ namespace ProjetaARQ.Commands.DetailDoor
 
             if (commandData.Application.ActiveUIDocument == null)
                 return Result.Failure("Nenhum projeto aberto.");
+
 
             _detailDoorView.ShowDialog();
 

@@ -1,4 +1,5 @@
-﻿using Wpf.Ui.Controls;
+﻿using ProjetaARQ.Commands.DetailDoor.ViewModels;
+using Wpf.Ui.Controls;
 
 namespace ProjetaARQ.Commands.DetailDoor
 {

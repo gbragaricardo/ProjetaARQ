@@ -1,26 +1,50 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using Autodesk.Revit.DB;
+using CommunityToolkit.Mvvm.ComponentModel;
+using ProjetaARQ.Commands.DetailDoor.Services;
 using ProjetaARQ.Commands.Shared.Models;
 using ProjetaARQ.Commands.Shared.Services;
 using ProjetaARQ.Core.Services;
 using System.Collections;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 
-namespace ProjetaARQ.Commands.DetailDoor
+namespace ProjetaARQ.Commands.DetailDoor.ViewModels
 {
-    public partial class DetailDoorViewModel : ObservableObject
+    public partial class DetailDoorViewModel : ObservableObject, IDetailDoorResult
     {
         private readonly IRevitContext _revitContext;
         private readonly IViewTemplateService _viewTemplateService;
-        public ObservableCollection<ViewOptionItem> ViewOptionItems { get; } = new();
-        public ObservableCollection<RevitViewTemplateItem> AvailableViewTemplates { get; set; } = new();
+        private readonly IDoorService _doorService;
+        public ObservableCollection<RevitViewTemplateItem> AvailableViewTemplates { get; set; } = [];
+        public ObservableCollection<RevitPhaseItem> AvailablePhases { get; set; } = [];
+        public ObservableCollection<ViewOptionItem> ViewOptionItems { get; } = [];
 
-        public DetailDoorViewModel(IRevitContext revitContext, IViewTemplateService viewTemplateService)
+        [ObservableProperty] private ElementId _selectedPhaseId;
+
+        public DetailDoorViewModel(IRevitContext revitContext, IViewTemplateService viewTemplateService, IDoorService doorService)
         {
             _revitContext = revitContext;
             _viewTemplateService = viewTemplateService;
+            _doorService = doorService;
+
+            LoadAvailablePhases();
             LoadAvailableViewTemplates();
             CreateViewOptions();
+        }
+
+        public IList<ViewOptionItem> ViewOptions => ViewOptionItems.ToList();
+        public ElementId PhaseId => SelectedPhaseId;
+
+        private void LoadAvailablePhases()
+        {
+            var phases = _doorService.GetPhasesFromDoors(_revitContext.Doc);
+
+            AvailablePhases.Clear();
+
+            foreach (var phase in phases)
+                AvailablePhases.Add(phase);
         }
 
         private void LoadAvailableViewTemplates()
@@ -32,6 +56,7 @@ namespace ProjetaARQ.Commands.DetailDoor
             foreach (var template in templates)
                 AvailableViewTemplates.Add(template);
         }
+
         private void CreateViewOptions()
         {
             ViewOptionItems.Add(new ViewOptionItem { ViewOptionName = "Ortogonal 3D", IsChecked = true });

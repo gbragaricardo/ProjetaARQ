@@ -2,14 +2,16 @@
     x:Class="ProjetaARQ.Commands.DetailDoor.DetailDoorView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:components="clr-namespace:ProjetaARQ.Core.UI.Components"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:ProjetaARQ.Commands.DetailDoor"
+    xmlns:viewModels="clr-namespace:ProjetaARQ.Commands.DetailDoor.ViewModels"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    x:Name="RootWindow"
     Width="450"
     Height="Auto"
-    d:DataContext="{d:DesignInstance local:DetailDoorViewModel,
-                                     IsDesignTimeCreatable=True}"
+    d:DataContext="{d:DesignInstance viewModels:DetailDoorViewModel}"
     ExtendsContentIntoTitleBar="True"
     WindowBackdropType="Mica"
     WindowStartupLocation="CenterScreen"
@@ -69,10 +71,12 @@
                 </Border>
 
                 <Border Grid.Row="1" Padding="8">
-                    <ComboBox
-                        IsEditable="True"
-                        IsReadOnly="True"
-                        Text="Selecione a Fase" />
+                    <components:PlaceholderComboBox 
+                        PlaceholderText="Selecione a Fase" 
+                        ItemsSource="{Binding AvailablePhases}"
+                        DisplayMemberPath="Name"
+                        SelectedValuePath="Id"
+                        SelectedItem="{Binding SelectedPhaseId}"/>
                 </Border>
             </Grid>
 
@@ -124,15 +128,14 @@
                                         Content="{Binding ViewOptionName}"
                                         IsChecked="{Binding IsChecked}" />
 
-                                    <ComboBox
+                                    <components:PlaceholderComboBox
                                         Margin="0,0,0,16"
-                                        IsEditable="True"
-                                        IsReadOnly="True"
-                                        IsEnabled="{Binding IsChecked}"
-                                        ItemsSource="{Binding AvailableViewTemplates, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
-                                        SelectedItem="{Binding SelectedViewTemplate}"
                                         DisplayMemberPath="Name"
-                                        Text="Selecione o Template" />
+                                        IsEnabled="{Binding IsChecked}"
+                                        ItemsSource="{Binding DataContext.AvailableViewTemplates, ElementName=RootWindow}"
+                                        PlaceholderText="Selecione o Template"
+                                        SelectedItem="{Binding SelectedViewTemplate}"
+                                        SelectedValuePath="Id" />
 
                                 </StackPanel>
                             </DataTemplate>
