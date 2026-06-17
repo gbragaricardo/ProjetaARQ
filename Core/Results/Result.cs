@@ -3,24 +3,26 @@
     public class Result
     {
         public bool IsSuccess { get; }
-        public string Error { get; }
+        public string Message { get; }
+        public bool ShowMessage { get; }
         public bool IsFailure => !IsSuccess;
 
-        protected Result(bool isSuccess, string error)
+        protected Result(bool isSuccess, string message, bool showMessage)
         {
             IsSuccess = isSuccess;
-            Error = error;
+            Message = message;
+            ShowMessage = showMessage;
         }
 
-        public static Result Success() => new Result(true, string.Empty);
-        public static Result Failure(string error) => new Result(false, error);
+        public static Result Success(bool showMessage, string message = "") => new Result(true, message, showMessage);
+        public static Result Failure(bool showMessage, string message) => new Result(false, message, showMessage);
     }
 
     public class Result<T> : Result
     {
         public T Value { get; }
 
-        protected Result(T value, bool isSuccess, string error) : base(isSuccess, error)
+        protected Result(T value, bool isSuccess, string message) : base(isSuccess, message, false)
         {
             Value = value;
         }

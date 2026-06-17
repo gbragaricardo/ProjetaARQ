@@ -28,7 +28,9 @@ namespace ProjetaARQ.Core.Commands
 
                         if (appResult.IsFailure)
                         {
-                            message = appResult.Error;
+                            if (appResult.ShowMessage)
+                                message = appResult.Message;
+
                             return Result.Failed;
                         }
 

@@ -1,8 +1,6 @@
 ﻿using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
 using ProjetaARQ.Commands.DetailDoor.Services;
-using ProjetaARQ.Commands.DetailDoor.ViewModels;
-using ProjetaARQ.Commands.DetailDoor.Views;
 using ProjetaARQ.Core.DI;
 using ProjetaARQ.Core.Services;
 using ProjetaARQ.Core.UI;
@@ -28,20 +26,23 @@ namespace ProjetaARQ.Commands.DetailDoor
         }
         public Result Handle(ExternalCommandData commandData, ElementSet elements)
         {
+            int ignoredDoorTypes = 0;
+            int commitedAssemblies = 0;
+
             _telemetry.LogInfo("Iniciando detalhamento de Portas...");
 
             if (commandData.Application.ActiveUIDocument == null)
-                return Result.Failure("Nenhum projeto aberto.");
+                return Result.Failure(true, "Nenhum projeto aberto.");
 
             IDetailDoorResult dialogResult = _uiService.ShowDialog();
 
             if (dialogResult == null)
-                return Result.Failure("Comando cancelado pelo usuário.");
+                return Result.Failure(false, "Comando cancelado pelo usuário.");
 
             IList<Element> doorElements = _doorService.GetDoorsByCreatedPhaseId(_revitContext.Doc, dialogResult.PhaseItem?.Id).ToList();
 
             if (doorElements.Count == 0)
-                return Result.Failure($"Nenhuma porta com a fase selecionada foi encontrada no projeto.");
+                return Result.Failure(true, $"Nenhuma porta com a fase selecionada foi encontrada no projeto.");
 
             HashSet<string> existingAssemblies = new FilteredElementCollector(_revitContext.Doc)
                 .OfClass(typeof(AssemblyType))
@@ -115,8 +116,8 @@ namespace ProjetaARQ.Commands.DetailDoor
                                 if (viewOption.IsViewOption3D == true)
                                 {
                                     View3D threedView = AssemblyViewUtils.Create3DOrthographic(
-                                        _revitContext.Doc, 
-                                        assemblyInstance.Id, 
+                                        _revitContext.Doc,
+                                        assemblyInstance.Id,
                                         viewOption.SelectedViewTemplate.Id,
                                         true);
 
@@ -128,13 +129,14 @@ namespace ProjetaARQ.Commands.DetailDoor
                                         _revitContext.Doc,
                                         assemblyInstance.Id,
                                         viewOption.ViewOrientation,
-                                        viewOption.SelectedViewTemplate.Id, 
+                                        viewOption.SelectedViewTemplate.Id,
                                         true);
 
                                     SafeSetName(view, $"{typeMark} - {viewOption.Tag}");
                                 }
 
                                 tView.Commit();
+                                commitedAssemblies++;
                             }
                             catch (Exception ex)
                             {
@@ -144,10 +146,13 @@ namespace ProjetaARQ.Commands.DetailDoor
                         }
                     }
                 }
+                
                 transGroup.Assimilate();
             }
 
-            return Result.Success();
+            TaskDialog.Show("Detalhamento de Portas", $"Processo concluído! {commitedAssemblies} montagens criadas. ");
+
+            return Result.Success(false);
         }
 
         private void SafeSetName(Element element, string baseName)
