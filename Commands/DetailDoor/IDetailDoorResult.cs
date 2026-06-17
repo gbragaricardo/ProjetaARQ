@@ -1,5 +1,6 @@
 ﻿using Autodesk.Revit.DB;
 using ProjetaARQ.Commands.DetailDoor.ViewModels;
+using ProjetaARQ.Commands.Shared.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,6 @@ namespace ProjetaARQ.Commands.DetailDoor
     public interface IDetailDoorResult
     {
         IList<ViewOptionItem> ViewOptions{ get; }
-        ElementId PhaseId { get; }
+        RevitPhaseItem PhaseItem { get; }
     }
 }

@@ -75,8 +75,7 @@
                         DisplayMemberPath="Name"
                         ItemsSource="{Binding AvailablePhases}"
                         PlaceholderText="Selecione a Fase"
-                        SelectedItem="{Binding SelectedPhaseId}"
-                        SelectedValuePath="Id" />
+                        SelectedItem="{Binding SelectedPhase, Mode=TwoWay}" />
                 </Border>
             </Grid>
 
@@ -121,12 +120,12 @@
                         </ItemsControl.ItemsPanel>
 
                         <ItemsControl.ItemTemplate>
-                            <DataTemplate DataType="{x:Type viewModels:ViewOptionItem}">
+                            <DataTemplate DataType="viewModels:ViewOptionItem">
                                 <StackPanel Margin="4">
                                     <CheckBox
                                         Padding="0"
                                         Content="{Binding ViewOptionName}"
-                                        IsChecked="{Binding IsChecked}" />
+                                        IsChecked="{Binding IsChecked, Mode=TwoWay}" />
 
                                     <components:PlaceholderComboBox
                                         Margin="0,0,0,16"
@@ -134,8 +133,7 @@
                                         IsEnabled="{Binding IsChecked}"
                                         ItemsSource="{Binding DataContext.AvailableViewTemplates, ElementName=RootWindow}"
                                         PlaceholderText="Selecione o Template"
-                                        SelectedItem="{Binding SelectedViewTemplate}"
-                                        SelectedValuePath="Id" />
+                                        SelectedItem="{Binding SelectedViewTemplate, Mode=TwoWay}" />
 
                                 </StackPanel>
                             </DataTemplate>

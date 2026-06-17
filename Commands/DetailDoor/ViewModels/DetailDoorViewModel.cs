@@ -22,7 +22,7 @@ namespace ProjetaARQ.Commands.DetailDoor.ViewModels
         public ObservableCollection<RevitPhaseItem> AvailablePhases { get; set; } = [];
         public ObservableCollection<ViewOptionItem> ViewOptionItems { get; } = [];
 
-        [ObservableProperty] private ElementId _selectedPhaseId;
+        [ObservableProperty] private RevitPhaseItem _selectedPhase;
 
         public DetailDoorViewModel(IRevitContext revitContext, IViewTemplateService viewTemplateService, IDoorService doorService)
         {
@@ -35,8 +35,8 @@ namespace ProjetaARQ.Commands.DetailDoor.ViewModels
             CreateViewOptions();
         }
 
-        public IList<ViewOptionItem> ViewOptions => ViewOptionItems.ToList();
-        public ElementId PhaseId => SelectedPhaseId;
+        public IList<ViewOptionItem> ViewOptions => ViewOptionItems.Where(vo => vo.IsChecked == true).ToList();
+        public RevitPhaseItem PhaseItem => SelectedPhase;
 
         private void LoadAvailablePhases()
         {
@@ -60,16 +60,79 @@ namespace ProjetaARQ.Commands.DetailDoor.ViewModels
 
         private void CreateViewOptions()
         {
-            ViewOptionItems.Add(new ViewOptionItem { ViewOptionName = "Ortogonal 3D", IsChecked = true });
-            ViewOptionItems.Add(new ViewOptionItem { ViewOptionName = "Planta da Porta", IsChecked = true, ViewOrientation = AssemblyDetailViewOrientation.HorizontalDetail });
-            ViewOptionItems.Add(new ViewOptionItem { ViewOptionName = "Corte A", IsChecked = true, ViewOrientation = AssemblyDetailViewOrientation.DetailSectionA });
-            ViewOptionItems.Add(new ViewOptionItem { ViewOptionName = "Elevação Frontal", IsChecked = true, ViewOrientation = AssemblyDetailViewOrientation.ElevationFront });
-            ViewOptionItems.Add(new ViewOptionItem { ViewOptionName = "Corte B",  ViewOrientation = AssemblyDetailViewOrientation.DetailSectionB });
-            ViewOptionItems.Add(new ViewOptionItem { ViewOptionName = "Elevação de Topo",  ViewOrientation = AssemblyDetailViewOrientation.ElevationTop });
-            ViewOptionItems.Add(new ViewOptionItem { ViewOptionName = "Elevação Inferior", ViewOrientation = AssemblyDetailViewOrientation.ElevationBottom });
-            ViewOptionItems.Add(new ViewOptionItem { ViewOptionName = "Elevação Esquerda", ViewOrientation = AssemblyDetailViewOrientation.ElevationLeft });
-            ViewOptionItems.Add(new ViewOptionItem { ViewOptionName = "Elevação Direita", ViewOrientation = AssemblyDetailViewOrientation.ElevationRight });
-            ViewOptionItems.Add(new ViewOptionItem { ViewOptionName = "Elevação Posterior", ViewOrientation = AssemblyDetailViewOrientation.ElevationBack });
+            ViewOptionItems.Add(new ViewOptionItem
+            {
+                ViewOptionName = "Ortogonal 3D",
+                IsChecked = true,
+                IsViewOption3D = true,
+                Tag = "3D", 
+            });
+
+            ViewOptionItems.Add(new ViewOptionItem 
+            { 
+                ViewOptionName = "Planta da Porta", 
+                IsChecked = true, 
+                ViewOrientation = AssemblyDetailViewOrientation.HorizontalDetail,
+                Tag = "PLANTA",
+            });
+
+            ViewOptionItems.Add(new ViewOptionItem 
+            { 
+                ViewOptionName = "Corte A", 
+                IsChecked = true,
+                ViewOrientation = AssemblyDetailViewOrientation.DetailSectionA,
+                Tag = "CORTE",
+            });
+
+            ViewOptionItems.Add(new ViewOptionItem 
+            { 
+                ViewOptionName = "Elevação Frontal", 
+                IsChecked = true, 
+                ViewOrientation = AssemblyDetailViewOrientation.ElevationFront,
+                Tag = "VISTA FRONTAL",
+            });
+
+            ViewOptionItems.Add(new ViewOptionItem 
+            { 
+                ViewOptionName = "Corte B", 
+                ViewOrientation = AssemblyDetailViewOrientation.DetailSectionB,
+                Tag = "CORTE B",
+            });
+
+            ViewOptionItems.Add(new ViewOptionItem
+            { 
+                ViewOptionName = "Elevação Superior",
+                ViewOrientation = AssemblyDetailViewOrientation.ElevationTop,
+                Tag = "VISTA SUPERIOR",
+            });
+
+            ViewOptionItems.Add(new ViewOptionItem 
+            {
+                ViewOptionName = "Elevação Inferior",
+                ViewOrientation = AssemblyDetailViewOrientation.ElevationBottom,
+                Tag = "VISTA INFERIOR",
+            });
+
+            ViewOptionItems.Add(new ViewOptionItem
+            { 
+                ViewOptionName = "Elevação Esquerda", 
+                ViewOrientation = AssemblyDetailViewOrientation.ElevationLeft,
+                Tag = "VISTA LATERAL ESQUERDA",
+            });
+
+            ViewOptionItems.Add(new ViewOptionItem 
+            { 
+                ViewOptionName = "Elevação Direita",
+                ViewOrientation = AssemblyDetailViewOrientation.ElevationRight,
+                Tag = "VISTA LATERAL DIREITA",
+            });
+
+            ViewOptionItems.Add(new ViewOptionItem 
+            { 
+                ViewOptionName = "Elevação Posterior",
+                ViewOrientation = AssemblyDetailViewOrientation.ElevationBack,
+                Tag = "VISTA POSTERIOR",
+            });
         }
 
         [RelayCommand]

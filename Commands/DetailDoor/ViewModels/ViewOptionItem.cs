@@ -10,6 +10,9 @@ namespace ProjetaARQ.Commands.DetailDoor.ViewModels
         private string _viewOptionName;
 
         [ObservableProperty]
+        private string _tag;
+
+        [ObservableProperty]
         private bool _isChecked;
 
         [ObservableProperty]

@@ -4,11 +4,7 @@ using ProjetaARQ.Commands.DetailDoor.ViewModels;
 using ProjetaARQ.Commands.DetailDoor.Views;
 using ProjetaARQ.Commands.Shared.Services;
 using ProjetaARQ.Core.DI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using ProjetaARQ.Core.UI;
 
 namespace ProjetaARQ.Commands.DetailDoor
 {
@@ -16,9 +12,11 @@ namespace ProjetaARQ.Commands.DetailDoor
     {
         public void RegisterServices(IServiceCollection services)
         {
-            services.AddTransient<DetailDoorViewModel>();
-            services.AddTransient<DetailDoorView>();
-            services.AddTransient<DetailDoorHandler>();
+            services.AddScoped<DetailDoorViewModel>();
+            services.AddScoped<DetailDoorView>();
+            services.AddScoped<DetailDoorHandler>();
+
+            services.AddTransient<IUIService<IDetailDoorResult>, DetailDoorUIService>();
             services.AddTransient<IViewTemplateService, ViewTemplateService>();
             services.AddTransient<IDoorService, DoorService>();
         }

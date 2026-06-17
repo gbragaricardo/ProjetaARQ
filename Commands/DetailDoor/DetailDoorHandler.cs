@@ -5,6 +5,7 @@ using ProjetaARQ.Commands.DetailDoor.ViewModels;
 using ProjetaARQ.Commands.DetailDoor.Views;
 using ProjetaARQ.Core.DI;
 using ProjetaARQ.Core.Services;
+using ProjetaARQ.Core.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,16 +17,14 @@ namespace ProjetaARQ.Commands.DetailDoor
         private readonly IAppTelemetry _telemetry;
         private readonly IRevitContext _revitContext;
         private readonly IDoorService _doorService;
-        private readonly DetailDoorView _detailDoorView;
-        private readonly DetailDoorViewModel _detailDoorViewModel;
+        private readonly IUIService<IDetailDoorResult> _uiService;
 
-        public DetailDoorHandler(IAppTelemetry telemetry, IRevitContext revitContext, IDoorService doorService, DetailDoorView detailDoorView, DetailDoorViewModel detailDoorViewModel)
+        public DetailDoorHandler(IAppTelemetry telemetry, IRevitContext revitContext, IDoorService doorService, IUIService<IDetailDoorResult> uIService)
         {
             _telemetry = telemetry;
             _revitContext = revitContext;
             _doorService = doorService;
-            _detailDoorView = detailDoorView;
-            _detailDoorViewModel = detailDoorViewModel;
+            _uiService = uIService;
         }
         public Result Handle(ExternalCommandData commandData, ElementSet elements)
         {
@@ -34,32 +33,38 @@ namespace ProjetaARQ.Commands.DetailDoor
             if (commandData.Application.ActiveUIDocument == null)
                 return Result.Failure("Nenhum projeto aberto.");
 
-            if (_detailDoorView.ShowDialog() == false)
+            IDetailDoorResult dialogResult = _uiService.ShowDialog();
+
+            if (dialogResult == null)
                 return Result.Failure("Comando cancelado pelo usuário.");
 
-            IDetailDoorResult dialogResult = _detailDoorViewModel;
-            IList<Element> doorElements = _doorService.GetDoorsByCreatedPhaseId(_revitContext.Doc, dialogResult.PhaseId).ToList();
+            IList<Element> doorElements = _doorService.GetDoorsByCreatedPhaseId(_revitContext.Doc, dialogResult.PhaseItem?.Id).ToList();
 
             if (doorElements.Count == 0)
                 return Result.Failure($"Nenhuma porta com a fase selecionada foi encontrada no projeto.");
 
+            HashSet<string> existingAssemblies = new FilteredElementCollector(_revitContext.Doc)
+                .OfClass(typeof(AssemblyType))
+                .Select(a => a.Name)
+                .ToHashSet();
+
             Dictionary<string, Element> doorsByTypeMark = new Dictionary<string, Element>();
             foreach (var door in doorElements)
             {
-
-                if (door.AssemblyInstanceId != ElementId.InvalidElementId)
-                    continue;
-
                 Element doorType = _revitContext.Doc.GetElement(door.GetTypeId());
+
                 Parameter typeMarkParameter = doorType?.get_Parameter(BuiltInParameter.WINDOW_TYPE_ID);
 
                 if (typeMarkParameter == null || String.IsNullOrEmpty(typeMarkParameter.AsString()))
                     typeMarkParameter = doorType?.get_Parameter(BuiltInParameter.ALL_MODEL_TYPE_MARK);
 
-                if (typeMarkParameter == null || String.IsNullOrEmpty(typeMarkParameter.AsString())) 
-                    continue;
+                if (typeMarkParameter == null || String.IsNullOrEmpty(typeMarkParameter.AsString())) continue;
 
                 string typeMark = typeMarkParameter.AsString();
+
+                if (existingAssemblies.Contains(typeMark)) continue;
+
+                if (door.AssemblyInstanceId != ElementId.InvalidElementId) continue;
 
                 if (doorsByTypeMark.ContainsKey(typeMark)) continue;
 
@@ -76,7 +81,6 @@ namespace ProjetaARQ.Commands.DetailDoor
                     Element door = item.Value;
                     AssemblyInstance assemblyInstance = null;
 
-                    // 2. Transação isolada para criar a Montagem
                     using (Transaction tAssembly = new Transaction(_revitContext.Doc, $"Criar Montagem {typeMark}"))
                     {
                         tAssembly.Start();
@@ -84,21 +88,23 @@ namespace ProjetaARQ.Commands.DetailDoor
                         {
                             List<ElementId> elementIds = new List<ElementId> { door.Id };
                             assemblyInstance = AssemblyInstance.Create(_revitContext.Doc, elementIds, door.Category.Id);
-
-                            _revitContext.Doc.Regenerate(); // Essencial após criar a montagem
-                            SafeSetName(assemblyInstance, typeMark);
-
                             tAssembly.Commit();
                         }
                         catch (Exception ex)
                         {
                             _telemetry.LogError(ex, $"Erro ao criar montagem para a porta {typeMark}");
                             tAssembly.RollBack();
-                            continue; // Se a montagem falhou, pula para a próxima porta
+                            continue;
                         }
                     }
 
-                    // 3. Loop de Vistas (Cada vista tem sua própria transação)
+                    using (Transaction tRename = new Transaction(_revitContext.Doc, $"Renomear Montagem {typeMark}"))
+                    {
+                        tRename.Start();
+                        SafeSetName(assemblyInstance, typeMark);
+                        tRename.Commit();
+                    }
+
                     foreach (var viewOption in dialogResult.ViewOptions)
                     {
                         using (Transaction tView = new Transaction(_revitContext.Doc, $"Criar Vista {typeMark}"))
@@ -108,29 +114,36 @@ namespace ProjetaARQ.Commands.DetailDoor
                             {
                                 if (viewOption.IsViewOption3D == true)
                                 {
-                                    View3D threedView = AssemblyViewUtils.Create3DOrthographic(_revitContext.Doc, assemblyInstance.Id);
-                                    threedView.ViewTemplateId = viewOption.SelectedViewTemplate.Id;
-                                    SafeSetName(threedView, $"{typeMark} - 3D");
+                                    View3D threedView = AssemblyViewUtils.Create3DOrthographic(
+                                        _revitContext.Doc, 
+                                        assemblyInstance.Id, 
+                                        viewOption.SelectedViewTemplate.Id,
+                                        true);
+
+                                    SafeSetName(threedView, $"{typeMark} - {viewOption.Tag}");
                                 }
                                 else
                                 {
-                                    ViewSection view = AssemblyViewUtils.CreateDetailSection(_revitContext.Doc, assemblyInstance.Id, viewOption.ViewOrientation);
-                                    view.ViewTemplateId = viewOption.SelectedViewTemplate.Id;
-                                    SafeSetName(view, $"{typeMark} - VOU MUDAR");
+                                    ViewSection view = AssemblyViewUtils.CreateDetailSection(
+                                        _revitContext.Doc,
+                                        assemblyInstance.Id,
+                                        viewOption.ViewOrientation,
+                                        viewOption.SelectedViewTemplate.Id, 
+                                        true);
+
+                                    SafeSetName(view, $"{typeMark} - {viewOption.Tag}");
                                 }
 
-                                tView.Commit(); // Se deu certo, salva a vista
+                                tView.Commit();
                             }
                             catch (Exception ex)
                             {
                                 _telemetry.LogError(ex, $"Erro ao criar vista para a montagem {typeMark}");
-                                tView.RollBack(); // Se essa vista falhou, desfaz APENAS essa vista, as outras continuam!
+                                tView.RollBack();
                             }
                         }
                     }
                 }
-
-                // 4. O Gran Finale: Amassa tudo em um único "Desfazer" na UI do Revit!
                 transGroup.Assimilate();
             }
 

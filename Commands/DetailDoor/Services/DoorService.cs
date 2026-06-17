@@ -27,14 +27,13 @@ namespace ProjetaARQ.Commands.DetailDoor.Services
 
             return doors
                 .Select(d => d.CreatedPhaseId)
-                .Where(id => id != ElementId.InvalidElementId)
+                .Where(phaseId => phaseId != ElementId.InvalidElementId)
                 .Distinct()
-                .Select(id =>
+                .Select(phaseId =>
                 {
-                    var phase = doc.GetElement(id) as Phase;
-                    return new RevitPhaseItem(phase?.Name ?? "Fase não encontrada", id);
-                })
-                .ToList();
+                    var phase = doc.GetElement(phaseId) as Phase;
+                    return new RevitPhaseItem(phase?.Name ?? "Fase não encontrada", phaseId);
+                });
         }
     }
 }
