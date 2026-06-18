@@ -4,18 +4,88 @@
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml">
 
     <ResourceDictionary.MergedDictionaries>
-        <ui:ThemesDictionary Theme="Light" />
+        <ui:ThemesDictionary
+            Theme="Light" />
         <ui:ControlsDictionary />
     </ResourceDictionary.MergedDictionaries>
 
-    <Color x:Key="ProjetaBrandColor">#005A9E</Color>
-    <SolidColorBrush x:Key="ProjetaBrandBrush" Color="{StaticResource ProjetaBrandColor}" />
+    <Color
+        x:Key="SystemAccentColorPrimary">#DB0F19</Color>
+    <Color
+        x:Key="SystemAccentColorSecondary">#A50B13</Color>
+    <Color
+        x:Key="SystemAccentColorTertiary">#4C0105</Color>
+    <Color
+        x:Key="ProjetaBlue">#16559F</Color>
+    <Color
+        x:Key="ProjetaTeal">#009587</Color>
+    <Color
+        x:Key="ProjetaGreen">#26994C</Color>
+    <Color
+        x:Key="ProjetaCopper">#B17F49</Color>
+    <Color
+        x:Key="ProjetaGray">#828282</Color>
+    <Color
+        x:Key="ProjetaBlack">#000000</Color>
 
-    <Style x:Key="ProjetaSectionHeaderStyle" TargetType="TextBlock">
-        <Setter Property="FontSize" Value="14" />
-        <Setter Property="FontWeight" Value="Medium" />
-        <Setter Property="Margin" Value="0,0,0,12" />
-        <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}" />
+
+    <SolidColorBrush
+        x:Key="SystemAccentColorPrimaryBrush"
+        Color="{StaticResource SystemAccentColorPrimary}" />
+    <SolidColorBrush
+        x:Key="SystemAccentColorSecondaryBrush"
+        Color="{StaticResource SystemAccentColorSecondary}" />
+    <SolidColorBrush
+        x:Key="SystemAccentColorTertiaryBrush"
+        Color="{StaticResource SystemAccentColorTertiary}" />
+    <SolidColorBrush
+        x:Key="SystemControlHighlightAccentBrush"
+        Color="{StaticResource SystemAccentColorPrimary}" />
+
+    <SolidColorBrush
+        x:Key="ProjetaRedBrush"
+        Color="{StaticResource SystemAccentColorPrimary}" />
+    <SolidColorBrush
+        x:Key="ProjetaDarkRedBrush"
+        Color="{StaticResource SystemAccentColorSecondary}" />
+    <SolidColorBrush
+        x:Key="ProjetaBurgundyBrush"
+        Color="{StaticResource SystemAccentColorTertiary}" />
+
+    <SolidColorBrush
+        x:Key="ProjetaBlueBrush"
+        Color="{StaticResource ProjetaBlue}" />
+    <SolidColorBrush
+        x:Key="ProjetaTealBrush"
+        Color="{StaticResource ProjetaTeal}" />
+    <SolidColorBrush
+        x:Key="ProjetaGreenBrush"
+        Color="{StaticResource ProjetaGreen}" />
+    <SolidColorBrush
+        x:Key="ProjetaCopperBrush"
+        Color="{StaticResource ProjetaCopper}" />
+    <SolidColorBrush
+        x:Key="ProjetaGrayBrush"
+        Color="{StaticResource ProjetaGray}" />
+    <SolidColorBrush
+        x:Key="ProjetaBlackBrush"
+        Color="{StaticResource ProjetaBlack}" />
+
+    <Style
+        x:Key="ProjetaSectionHeaderStyle"
+        TargetType="TextBlock">
+        <Setter
+            Property="FontSize"
+            Value="14" />
+        <Setter
+            Property="FontWeight"
+            Value="Medium" />
+        <Setter
+            Property="Margin"
+            Value="0,0,0,12" />
+        <Setter
+            Property="Foreground"
+            Value="{DynamicResource TextFillColorSecondaryBrush}" />
     </Style>
 
 </ResourceDictionary>
