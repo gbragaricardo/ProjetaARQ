@@ -17,19 +17,6 @@
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
 
-    <ui:FluentWindow.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <!--  1. CARREGAMENTO BRUTO DO WPF-UI: Resolve o bug do Application.Current no XAML Designer  -->
-                <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Resources/Theme/Light.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Resources/Wpf.Ui.xaml" />
-
-                <!--  2. PACK URI COMPLETO: Resolve o caminho do seu arquivo local  -->
-                <ResourceDictionary Source="pack://application:,,,/ProjetaARQ;component/Core/UI/DesignSystem.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </ui:FluentWindow.Resources>
-
     <Border Padding="8,0">
         <Grid>
             <Grid.RowDefinitions>
@@ -52,7 +39,7 @@
                     Grid.Column="0"
                     Padding="8">
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock
+                        <ui:TextBlock
                             Margin="0,0,8,0"
                             VerticalAlignment="Center"
                             Style="{StaticResource SubtitleTextBlockStyle}"
@@ -61,7 +48,7 @@
                         <ui:SymbolIcon
                             VerticalAlignment="Center"
                             FontSize="16"
-                            Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                            Foreground="{DynamicResource ProjetaBlueBrush}"
                             Symbol="Info24">
                             <ui:SymbolIcon.ToolTip>
                                 <ToolTip Content="Todas as portas da fase escolhidas serão detalhadas." />
@@ -99,7 +86,7 @@
                         <ui:SymbolIcon
                             VerticalAlignment="Center"
                             FontSize="16"
-                            Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                            Foreground="{DynamicResource ProjetaBlueBrush}"
                             Symbol="Info24">
                             <ui:SymbolIcon.ToolTip>
                                 <ToolTip Content="Marque quais vistas serão geradas para as montagens." />
@@ -148,6 +135,8 @@
                 Margin="8"
                 Padding="8"
                 HorizontalAlignment="Right"
+                Appearance="Primary"
+                Icon="{ui:SymbolIcon Symbol=Play24}"
                 Command="{Binding GenerateAssembliesCommand}"
                 Content="Gerar Montagens" />
         </Grid>
