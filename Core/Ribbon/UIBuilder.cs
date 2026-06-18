@@ -62,7 +62,7 @@ namespace ProjetaARQ.Core.Ribbon
                 typeof(DetailDoorCommand).FullName,
                 mainPanel,
                 "Exportar Memorial Descritivo",
-                "detail_door.png",
+                "door_assembly.png",
                 true);
 
 

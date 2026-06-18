@@ -135,9 +135,26 @@ namespace ProjetaARQ.Commands.DetailDoor.ViewModels
             });
         }
 
+        private bool CanCreateAssemblies()
+        {
+            if (SelectedPhase == null)
+                return false;
+
+            if (ViewOptionItems.Any(vo => vo.IsChecked && vo.SelectedViewTemplate == null))
+                return false;
+
+            if (!ViewOptionItems.Any(vo => vo.IsChecked))
+                return false;
+
+            return true;
+        }
+
         [RelayCommand]
         public void CreateAssemblies()
         {
+            if (CanCreateAssemblies() == false) 
+                return;
+
             RequestClose?.Invoke();
         }
     }

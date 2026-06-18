@@ -50,6 +50,7 @@
 
 	<ItemGroup>
 	  <None Remove="Resources\Icons\detail_door.png" />
+	  <None Remove="Resources\Icons\door_assembly.png" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -82,7 +83,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<EmbeddedResource Include="Resources\Icons\detail_door.png" />
+		<EmbeddedResource Include="Resources\Icons\door_assembly.png" />
 		<EmbeddedResource Include="Resources\Images\word-doc.png" />
 		<EmbeddedResource Include="Resources\Icons\showroom.png" />
 		<EmbeddedResource Include="Resources\Images\moon-theme.png" />
