@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using Wpf.Ui.Appearance;
 
 namespace ProjetaARQ.Core.UI
 {
@@ -22,12 +23,20 @@ namespace ProjetaARQ.Core.UI
                     new Application { ShutdownMode = ShutdownMode.OnExplicitShutdown };
                 }
 
-                // URI ajustada perfeitamente para ler o arquivo na pasta Core/UI/
-                var designSystemUri = new Uri("pack://application:,,,/ProjetaARQ;component/Core/UI/DesignSystem.xaml", UriKind.Absolute);
-                var projetaResources = new ResourceDictionary { Source = designSystemUri };
+                // 1. Carrega a base do WPF-UI (Tema Claro e Controles)
+                var lightThemeUri = new Uri("pack://application:,,,/Wpf.Ui;component/Resources/Theme/Light.xaml", UriKind.Absolute);
+                var wpfUiUri = new Uri("pack://application:,,,/Wpf.Ui;component/Resources/Wpf.Ui.xaml", UriKind.Absolute);
 
-                // Mescla os estilos de forma que fiquem disponíveis globalmente na DLL
-                Application.Current.Resources.MergedDictionaries.Add(projetaResources);
+                Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary { Source = lightThemeUri });
+                Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary { Source = wpfUiUri });
+
+                var projetaRed = System.Windows.Media.Color.FromRgb(219, 15, 25);
+                ApplicationAccentColorManager.Apply(projetaRed);
+
+
+                var designSystemUri = new Uri("pack://application:,,,/ProjetaARQ;component/Core/UI/DesignSystem.xaml", UriKind.Absolute);
+                Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary { Source = designSystemUri });
+
 
                 _isInitialized = true;
             }

@@ -26,8 +26,8 @@ namespace ProjetaARQ.Commands.DetailDoor
         }
         public Result Handle(ExternalCommandData commandData, ElementSet elements)
         {
-            int ignoredDoorTypes = 0;
-            int commitedAssemblies = 0;
+            int createdViewsCount = 0;
+            int commitedAssembliesCount = 0;
 
             _telemetry.LogInfo("Iniciando detalhamento de Portas...");
 
@@ -49,6 +49,7 @@ namespace ProjetaARQ.Commands.DetailDoor
                 .Select(a => a.Name)
                 .ToHashSet();
 
+            HashSet<string> allFoundTypeMarks = new HashSet<string>();
             Dictionary<string, Element> doorsByTypeMark = new Dictionary<string, Element>();
             foreach (var door in doorElements)
             {
@@ -63,6 +64,8 @@ namespace ProjetaARQ.Commands.DetailDoor
 
                 string typeMark = typeMarkParameter.AsString();
 
+                allFoundTypeMarks.Add(typeMark);
+
                 if (existingAssemblies.Contains(typeMark)) continue;
 
                 if (door.AssemblyInstanceId != ElementId.InvalidElementId) continue;
@@ -71,6 +74,8 @@ namespace ProjetaARQ.Commands.DetailDoor
 
                 doorsByTypeMark.Add(typeMark, door);
             }
+
+            int ignoredDoorTypesCount = allFoundTypeMarks.Count - doorsByTypeMark.Count;
 
             using (TransactionGroup transGroup = new TransactionGroup(_revitContext.Doc, "Montagem Automática de Portas"))
             {
@@ -136,7 +141,7 @@ namespace ProjetaARQ.Commands.DetailDoor
                                 }
 
                                 tView.Commit();
-                                commitedAssemblies++;
+                                createdViewsCount++;
                             }
                             catch (Exception ex)
                             {
@@ -145,14 +150,21 @@ namespace ProjetaARQ.Commands.DetailDoor
                             }
                         }
                     }
+
+                    commitedAssembliesCount++;
                 }
-                
+
                 transGroup.Assimilate();
             }
 
-            TaskDialog.Show("Detalhamento de Portas", $"Processo concluído! {commitedAssemblies} montagens criadas. ");
+            TaskDialog.Show(
+                "Montagem de Portas",
+                $"Processo concluído!\n" +
+                $"- {commitedAssembliesCount} Tipos de portas montados.\n" +
+                $"- {createdViewsCount} Vistas geradas.\n" +
+                $"- {ignoredDoorTypesCount} Tipos ignorados.");
 
-            return Result.Success(false);
+            return Result.Success(showMessage: false);
         }
 
         private void SafeSetName(Element element, string baseName)

@@ -58,7 +58,7 @@ namespace ProjetaARQ.Core.Ribbon
 
             _ribbonManager.AddPushButton(
                 "DetailDoorButton",
-                "Detalhar\nPortas",
+                "Montagem\nPortas",
                 typeof(DetailDoorCommand).FullName,
                 mainPanel,
                 "Exportar Memorial Descritivo",

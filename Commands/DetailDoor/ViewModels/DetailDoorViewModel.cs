@@ -136,7 +136,7 @@ namespace ProjetaARQ.Commands.DetailDoor.ViewModels
         }
 
         [RelayCommand]
-        public void GenerateAssemblies()
+        public void CreateAssemblies()
         {
             RequestClose?.Invoke();
         }
