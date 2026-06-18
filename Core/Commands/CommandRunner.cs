@@ -4,12 +4,13 @@ using Autodesk.Revit.DB;
 using Microsoft.Extensions.DependencyInjection;
 using ProjetaARQ.Core.DI;
 using ProjetaARQ.Core.Services;
+using ProjetaARQ.Core.Results;
 
 namespace ProjetaARQ.Core.Commands
 {
     public static class CommandRunner
     {
-        public static Result Run<THandler>(ExternalCommandData commandData, ref string message, ElementSet elements) where THandler : ICommandHandler
+        public static Autodesk.Revit.UI.Result Run<THandler>(ExternalCommandData commandData, ref string message, ElementSet elements) where THandler : ICommandHandler
         {
             using (var scope = AddinApplication.Provider.CreateScope())
             {
@@ -26,21 +27,34 @@ namespace ProjetaARQ.Core.Commands
                         var handler = scope.ServiceProvider.GetRequiredService<THandler>();
                         var appResult = handler.Handle(commandData, elements);
 
-                        if (appResult.IsFailure)
+                        switch (appResult.Status)
                         {
-                            if (appResult.ShowMessage)
+                            case ResultStatus.Success:
+                                if (!string.IsNullOrWhiteSpace(appResult.Message))
+                                    TaskDialog.Show("Sucesso", appResult.Message);
+
+                                return Autodesk.Revit.UI.Result.Succeeded;
+
+                            case ResultStatus.Warning:
+                                TaskDialog.Show("Aviso", appResult.Message);
+
+                                return Autodesk.Revit.UI.Result.Cancelled;
+
+                            case ResultStatus.Cancelled:
+                                return Autodesk.Revit.UI.Result.Cancelled;
+
+                            case ResultStatus.FatalError:
+
+                            default:
                                 message = appResult.Message;
-
-                            return Result.Failed;
+                                return Autodesk.Revit.UI.Result.Failed;
                         }
-
-                        return Result.Succeeded;
                     }
                     catch (Exception ex)
                     {
                         telemetry.LogError(ex, $"Falha fatal em {commandName}");
-                        message = $"Erro crítico: {ex.Message}";
-                        return Result.Failed;
+                        message = $"Erro crítico inesperado: {ex.Message}";
+                        return Autodesk.Revit.UI.Result.Failed;
                     }
                 }
             }

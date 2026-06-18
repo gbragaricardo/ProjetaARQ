@@ -32,17 +32,18 @@ namespace ProjetaARQ.Commands.DetailDoor
             _telemetry.LogInfo("Iniciando detalhamento de Portas...");
 
             if (commandData.Application.ActiveUIDocument == null)
-                return Result.Failure(true, "Nenhum projeto aberto.");
+                return Result.Warning("Nenhum projeto aberto.");
+            
 
             IDetailDoorResult dialogResult = _uiService.ShowDialog();
 
             if (dialogResult == null)
-                return Result.Failure(false, "Comando cancelado pelo usuário.");
+                return Result.Cancelled();
 
             IList<Element> doorElements = _doorService.GetDoorsByCreatedPhaseId(_revitContext.Doc, dialogResult.PhaseItem?.Id).ToList();
 
             if (doorElements.Count == 0)
-                return Result.Failure(true, $"Nenhuma porta com a fase selecionada foi encontrada no projeto.");
+                return Result.Warning("Nenhuma porta com a fase selecionada foi encontrada no projeto.");
 
             HashSet<string> existingAssemblies = new FilteredElementCollector(_revitContext.Doc)
                 .OfClass(typeof(AssemblyType))
@@ -157,14 +158,11 @@ namespace ProjetaARQ.Commands.DetailDoor
                 transGroup.Assimilate();
             }
 
-            TaskDialog.Show(
-                "Montagem de Portas",
+            return Result.Success(
                 $"Processo concluído!\n" +
                 $"- {commitedAssembliesCount} Tipos de portas montados.\n" +
                 $"- {createdViewsCount} Vistas geradas.\n" +
                 $"- {ignoredDoorTypesCount} Tipos ignorados.");
-
-            return Result.Success(showMessage: false);
         }
 
         private void SafeSetName(Element element, string baseName)
