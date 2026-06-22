@@ -4,8 +4,7 @@
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml">
 
     <ResourceDictionary.MergedDictionaries>
-        <ui:ThemesDictionary
-            Theme="Light" />
+        <ui:ThemesDictionary Theme="Light" />
         <ui:ControlsDictionary />
     </ResourceDictionary.MergedDictionaries>
 
@@ -36,5 +35,5 @@
     <SolidColorBrush x:Key="ProjetaGrayBrush" Color="{StaticResource ProjetaGray}" />
     <SolidColorBrush x:Key="ProjetaBlackBrush" Color="{StaticResource ProjetaBlack}" />
 
-    
+
 </ResourceDictionary>

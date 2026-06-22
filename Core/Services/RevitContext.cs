@@ -4,7 +4,7 @@ using Autodesk.Revit.UI;
 
 namespace ProjetaARQ.Core.Services
 {
-    internal class RevitContext : IRevitContext
+    public class RevitContext : IRevitContext
     {
         public UIApplication UIApp { get; private set; }
         public Application App => UIApp?.Application;

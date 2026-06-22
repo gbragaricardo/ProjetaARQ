@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using System.Windows.Media;
 using Wpf.Ui.Appearance;
 
 namespace ProjetaARQ.Core.UI
@@ -30,13 +31,24 @@ namespace ProjetaARQ.Core.UI
                 Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary { Source = lightThemeUri });
                 Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary { Source = wpfUiUri });
 
-                var projetaRed = System.Windows.Media.Color.FromRgb(219, 15, 25);
-                ApplicationAccentColorManager.Apply(projetaRed);
-
-
                 var designSystemUri = new Uri("pack://application:,,,/ProjetaARQ;component/Core/UI/DesignSystem.xaml", UriKind.Absolute);
-                Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary { Source = designSystemUri });
+                var designSystemDict = new ResourceDictionary { Source = designSystemUri };
 
+                // 2. Extrai as cores exatas que você definiu no XAML
+                var primaryColor = (Color)designSystemDict["SystemAccentColorPrimary"];
+                var secondaryColor = (Color)designSystemDict["SystemAccentColorSecondary"];
+                var tertiaryColor = (Color)designSystemDict["SystemAccentColorTertiary"];
+
+                // 3. Alimenta o motor do Wpf.Ui com as cores da Projeta para gerar o Hover/Pressed perfeitos
+                ApplicationAccentColorManager.Apply(
+                    systemAccent: primaryColor,
+                    primaryAccent: primaryColor,
+                    secondaryAccent: secondaryColor,
+                    tertiaryAccent: tertiaryColor
+                );
+
+                // 4. Injeta o dicionário completo no processo do Revit (garantindo que seus Brushes sobrescrevam qualquer padrão)
+                Application.Current.Resources.MergedDictionaries.Add(designSystemDict);
 
                 _isInitialized = true;
             }
