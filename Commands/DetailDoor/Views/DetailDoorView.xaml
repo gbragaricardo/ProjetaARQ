@@ -37,11 +37,14 @@
 
         <ui:TitleBar
             Title="Montagem de Portas"
+            VerticalContentAlignment="Top"
             Grid.Row="0"
             ShowMaximize="False"
             ShowMinimize="False">
             <ui:TitleBar.TrailingContent>
                 <ui:Button
+                    Margin="0 0 16 0"
+                    VerticalAlignment="Top"
                     x:Name="BtnToggleTheme"
                     Appearance="Transparent"
                     Click="OnToggleThemeClicked">
