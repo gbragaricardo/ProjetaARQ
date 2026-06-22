@@ -14,7 +14,6 @@
     MinHeight="752"
     MaxHeight="752"
     d:DataContext="{d:DesignInstance viewModels:DetailDoorViewModel}"
-    Background="{DynamicResource ApplicationBackgroundBrush}"
     ExtendsContentIntoTitleBar="True"
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     ShowInTaskbar="True"
@@ -30,7 +29,7 @@
         </ResourceDictionary>
     </ui:FluentWindow.Resources>
 
-    <Grid>
+    <Grid Background="{DynamicResource ApplicationBackgroundBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
