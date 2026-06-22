@@ -45,10 +45,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ApplicationDefinition Remove="App.xaml" />
-	</ItemGroup>
-
-	<ItemGroup>
 	  <None Remove="Resources\Icons\detail_door.png" />
 	  <None Remove="Resources\Icons\door_assembly.png" />
 	</ItemGroup>
@@ -109,10 +105,6 @@
 
 	<ItemGroup>
 	  <None Include=".github\workflows\deploy-revit.yml" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Page Include="App.xaml" />
 	</ItemGroup>
 
 	<Target Name="LocalReleaseAndDeploy" AfterTargets="Build" Condition="'$(RevitYear)' != ''">

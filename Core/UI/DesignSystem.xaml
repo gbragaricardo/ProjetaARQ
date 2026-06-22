@@ -1,10 +1,10 @@
-﻿<ResourceDictionary
+<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml">
 
     <ResourceDictionary.MergedDictionaries>
-        <ui:ThemesDictionary Theme="Light" />
+        <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Resources/Wpf.Ui.xaml" />
         <ui:ControlsDictionary />
     </ResourceDictionary.MergedDictionaries>
 
@@ -35,5 +35,61 @@
     <SolidColorBrush x:Key="ProjetaGrayBrush" Color="{StaticResource ProjetaGray}" />
     <SolidColorBrush x:Key="ProjetaBlackBrush" Color="{StaticResource ProjetaBlack}" />
 
+    <Style x:Key="ProjetaPrimaryButtonStyle" TargetType="ui:Button">
+        <Setter Property="Background" Value="{StaticResource ProjetaRedBrush}" />
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Padding" Value="16,8" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ui:Button">
+                    <Border
+                        x:Name="Border"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="4">
+
+                        <StackPanel
+                            Margin="{TemplateBinding Padding}"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Orientation="Horizontal">
+
+                            <ContentPresenter
+                                x:Name="IconPresenter"
+                                Margin="0,0,8,0"
+                                VerticalAlignment="Center"
+                                Content="{TemplateBinding Icon}" />
+
+                            <ContentPresenter
+                                x:Name="TextPresenter"
+                                VerticalAlignment="Center"
+                                Content="{TemplateBinding Content}" />
+                        </StackPanel>
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Icon" Value="{x:Null}">
+                            <Setter TargetName="IconPresenter" Property="Visibility" Value="Collapsed" />
+                        </Trigger>
+
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Border" Property="Background" Value="{StaticResource ProjetaDarkRedBrush}" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="Border" Property="Background" Value="{StaticResource ProjetaBurgundyBrush}" />
+                        </Trigger>
+
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="Border" Property="Background" Value="{DynamicResource ControlFillColorDisabledBrush}" />
+                            <Setter Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 
 </ResourceDictionary>
