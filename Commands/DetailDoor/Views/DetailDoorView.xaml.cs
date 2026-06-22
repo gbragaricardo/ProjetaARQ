@@ -20,6 +20,10 @@ namespace ProjetaARQ.Commands.DetailDoor.Views
             // Define o DataContext para o MVVM funcionar de forma limpa
             DataContext = viewModel;
             viewModel.RequestClose += () => this.DialogResult = true;
+
+            // Inicializa de acordo com o tema global do Revit/aplicação em memória
+            _currentTheme = UiResourceManager.GetCurrentTheme();
+            UpdateThemeIcon();
         }
 
         private void OnToggleThemeClicked(object sender, RoutedEventArgs e)
@@ -31,25 +35,26 @@ namespace ProjetaARQ.Commands.DetailDoor.Views
                     ? ApplicationTheme.Dark
                     : ApplicationTheme.Light;
 
-                // 2. Localiza o ThemesDictionary definido localmente na janela e aplica o tema
-                var themesDict = this.Resources.MergedDictionaries.OfType<Wpf.Ui.Markup.ThemesDictionary>().FirstOrDefault();
-                if (themesDict != null)
-                {
-                    themesDict.Theme = _currentTheme;
-                }
+                // 2. Aplica o tema globalmente no nível da aplicação em memória
+                UiResourceManager.SetTheme(_currentTheme);
 
                 // 3. Atualiza o ícone da lua/sol correspondente
-                ThemeIcon.Symbol = _currentTheme == ApplicationTheme.Light
-                    ? SymbolRegular.WeatherMoon24
-                    : SymbolRegular.WeatherSunny24;
+                UpdateThemeIcon();
 
                 // 4. Reaplica as cores de acento do vermelho Projeta
                 UiResourceManager.ApplyProjetaAccents();
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine($"Erro ao alternar o tema localmente: {ex.Message}");
+                System.Diagnostics.Debug.WriteLine($"Erro ao alternar o tema global: {ex.Message}");
             }
+        }
+
+        private void UpdateThemeIcon()
+        {
+            ThemeIcon.Symbol = _currentTheme == ApplicationTheme.Light
+                ? SymbolRegular.WeatherMoon24
+                : SymbolRegular.WeatherSunny24;
         }
     }
 }
