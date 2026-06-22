@@ -1,4 +1,5 @@
 using Autodesk.Revit.UI;
+using ProjetaARQ.Commands.DebugFluentUi;
 using ProjetaARQ.Commands.DetailDoor;
 using ProjetaARQ.Commands.FamiliesPane.Commands;
 using ProjetaARQ.Commands.WordExport.Commands;
@@ -61,9 +62,18 @@ namespace ProjetaARQ.Core.Ribbon
                 "Montagem\nPortas",
                 typeof(DetailDoorCommand).FullName,
                 mainPanel,
-                "Exportar Memorial Descritivo",
+                "Cria montagems e vistas de todas as portas da fase selecionada",
                 "door_assembly.png",
                 true);
+
+            //_ribbonManager.AddPushButton(
+            //    "DebugButton",
+            //    "Debug\nFluentUI",
+            //    typeof(DebugCommand).FullName,
+            //    mainPanel,
+            //    "Debug",
+            //    "word.png",
+            //    true);
 
 
             #endregion
