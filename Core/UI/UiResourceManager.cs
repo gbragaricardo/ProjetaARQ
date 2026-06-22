@@ -59,14 +59,14 @@ namespace ProjetaARQ.Core.UI
             {
                 // Verifica o tema do Revit através do UIThemeManager (disponível a partir do Revit 2024)
                 if (Autodesk.Revit.UI.UIThemeManager.CurrentTheme == Autodesk.Revit.UI.UITheme.Dark)
-                {
                     return ApplicationTheme.Dark;
-                }
+
             }
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine($"Erro ao detectar tema do Revit: {ex.Message}");
             }
+
             return ApplicationTheme.Light;
         }
 
@@ -75,13 +75,14 @@ namespace ProjetaARQ.Core.UI
             try
             {
                 _currentTheme = theme;
+
                 var themesDict = Application.Current?.Resources?.MergedDictionaries
                     .OfType<ThemesDictionary>()
                     .FirstOrDefault();
+
                 if (themesDict != null)
-                {
                     themesDict.Theme = theme;
-                }
+                
             }
             catch (Exception ex)
             {
