@@ -35,21 +35,30 @@
         </Grid.RowDefinitions>
 
         <ui:TitleBar
-            Title="Montagem de Portas"
-            VerticalContentAlignment="Top"
             Grid.Row="0"
+            Margin="16,0,0,0"
+            VerticalContentAlignment="Top"
             ShowMaximize="False"
             ShowMinimize="False">
-            <ui:TitleBar.TrailingContent>
-                <ui:Button
-                    Margin="0 0 16 0"
-                    VerticalAlignment="Top"
-                    x:Name="BtnToggleTheme"
-                    Appearance="Transparent"
-                    Click="OnToggleThemeClicked">
-                    <ui:SymbolIcon x:Name="ThemeIcon" Symbol="WeatherMoon24" />
-                </ui:Button>
-            </ui:TitleBar.TrailingContent>
+            <ui:TitleBar.Header>
+                <StackPanel Orientation="Horizontal">
+                    <ui:TextBlock
+                        Margin="0,0,8,0"
+                        VerticalAlignment="Center"
+                        FontWeight="Bold"
+                        Style="{StaticResource BodyTextBlockStyle}"
+                        Text="Montagem de Portas" />
+
+                    <ui:Button
+                        x:Name="BtnToggleTheme"
+                        Margin="0,0,16,0"
+                        VerticalAlignment="Center"
+                        Appearance="Transparent"
+                        Click="OnToggleThemeClicked">
+                        <ui:SymbolIcon x:Name="ThemeIcon" Symbol="WeatherMoon24" />
+                    </ui:Button>
+                </StackPanel>
+            </ui:TitleBar.Header>
         </ui:TitleBar>
 
         <Border Grid.Row="1" Padding="8,0,8,8">
