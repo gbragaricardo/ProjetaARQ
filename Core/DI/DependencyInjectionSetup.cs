@@ -3,7 +3,7 @@ using ProjetaARQ.Commands.DebugFluentUi;
 using ProjetaARQ.Commands.DetailDoor;
 using ProjetaARQ.Commands.FamiliesPanel.MVVM;
 using ProjetaARQ.Core.Services;
-using System.Diagnostics;
+using ProjetaARQ.Core.UI;
 
 namespace ProjetaARQ.Core.DI
 {
@@ -13,6 +13,7 @@ namespace ProjetaARQ.Core.DI
         {
             services.AddSingleton<IAppTelemetry, AppTelemetry>();
             services.AddScoped<IRevitContext, RevitContext>();
+            services.AddSingleton<IThemeService>(UiResourceManager.ThemeService);
 
             services.AddSingleton<FamiliesViewModel>();
             services.AddSingleton<FamiliesView>();
