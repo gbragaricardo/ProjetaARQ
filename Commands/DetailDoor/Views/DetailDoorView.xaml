@@ -50,7 +50,6 @@
                         Text="Montagem de Portas" />
 
                     <ui:Button
-                        x:Name="BtnToggleTheme"
                         Margin="0,0,16,0"
                         VerticalAlignment="Center"
                         Appearance="Transparent"
