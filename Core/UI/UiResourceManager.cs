@@ -44,7 +44,7 @@ namespace ProjetaARQ.Core.UI
                 Application.Current.Resources.MergedDictionaries.Add(designSystemDict);
 
                 // 5. Aplica as cores no motor do Wpf.Ui pela primeira vez
-                ThemeService.ApplyProjetaAccents(_designSystemUri);
+                ThemeService.ApplyProjetaAccents();
 
                 _isInitialized = true;
             }
