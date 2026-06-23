@@ -12,10 +12,12 @@ namespace ProjetaARQ.Core.UI
     {
 
         private ApplicationTheme _currentTheme = ApplicationTheme.Light;
+        private readonly Uri _designSystemUri;
 
-        public ThemeService()
+        public ThemeService(Uri designSystemUri)
         {
             // Inicializa o tema baseado no Revit assim que o serviço é construído
+            _designSystemUri = designSystemUri;
             _currentTheme = GetHostTheme();
         }
 
@@ -34,11 +36,11 @@ namespace ProjetaARQ.Core.UI
             return ApplicationTheme.Light;
         }
 
-        public void ApplyProjetaAccents(Uri designSystemUri)
+        public void ApplyProjetaAccents()
         {
             try
             {
-                var dict = new ResourceDictionary { Source = designSystemUri };
+                var dict = new ResourceDictionary { Source = _designSystemUri };
 
                 var primaryColor = (Color)dict["SystemAccentColorPrimary"];
                 var secondaryColor = (Color)dict["SystemAccentColorSecondary"];

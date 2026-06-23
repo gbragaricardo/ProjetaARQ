@@ -28,7 +28,7 @@ namespace ProjetaARQ.Core.UI
                     new Application { ShutdownMode = ShutdownMode.OnExplicitShutdown };
 
                 // Dentro do EnsureResources()
-                ThemeService = new ThemeService();
+                ThemeService = new ThemeService(_designSystemUri);
                 var defaultTheme = ThemeService.GetCurrentTheme();
 
                 // 2. Carrega o ThemesDictionary no escopo global com o tema inicial

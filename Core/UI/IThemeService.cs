@@ -13,6 +13,6 @@ namespace ProjetaARQ.Core.UI
         ApplicationTheme GetHostTheme();
         ApplicationTheme GetCurrentTheme();
         void SetTheme(ApplicationTheme theme);
-        void ApplyProjetaAccents(Uri designSystemUri);
+        void ApplyProjetaAccents();
     }
 }
